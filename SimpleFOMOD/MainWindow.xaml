@@ -6,11 +6,20 @@
         xmlns:local="clr-namespace:SimpleFOMOD"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
-        WindowTransitionsEnabled="False">
+        Title="Welcome to SimpleFOMOD" Height="350" Width="413.594"
+        TitleCaps="False"
+        WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded" ResizeMode="NoResize">
 
     <Grid>
-        <Image x:Name="image" Height="100" Margin="10,17,10,0" VerticalAlignment="Top" Source="Resources/SimpleFOMOD_Logo.png"/>
+        <Image x:Name="imgLogo" Height="100" Margin="10,17,10,0" VerticalAlignment="Top" Source="Resources/SimpleFOMOD_Logo.png"/>
+        <TextBox x:Name="txtModName" HorizontalAlignment="Left" Height="23" Margin="112,122,0,0" TextWrapping="Wrap" Text="Mod Name" VerticalAlignment="Top" Width="188" FontFamily="Segoe UI" TextAlignment="Center"/>
+        <TextBox x:Name="txtAuthor" HorizontalAlignment="Left" Height="23" Margin="112,153,0,0" TextWrapping="Wrap" Text="Author Username" VerticalAlignment="Top" Width="188" FontFamily="Segoe UI" TextAlignment="Center"/>
+        <TextBox x:Name="txtVersion" HorizontalAlignment="Left" Height="23" Margin="112,184,0,0" TextWrapping="Wrap" Text="Version Number" VerticalAlignment="Top" Width="188" FontFamily="Segoe UI" TextAlignment="Center"/>
+        <TextBox x:Name="txtURL" HorizontalAlignment="Left" Height="23" Margin="112,215,0,0" TextWrapping="Wrap" Text="NexusMods URL" VerticalAlignment="Top" Width="188" FontFamily="Segoe UI" TextAlignment="Center"/>
+        <ComboBox x:Name="cboCategory" HorizontalAlignment="Left" Margin="112,246,0,0" VerticalAlignment="Top" Width="188" FontFamily="Segoe UI">
+            <ComboBoxItem/>
+        </ComboBox>
+        <Button x:Name="btnNext" Content="Next" HorizontalAlignment="Left" Margin="165,277,0,0" VerticalAlignment="Top" Width="75" FontFamily="Segoe UI" Click="btnNext_Click"/>
     </Grid>
 </Controls:MetroWindow>
 
