@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 
 namespace SimpleFOMOD
-{
+{  
     public class Mod
     {
         public string ModName { get; set; }
