@@ -10,17 +10,17 @@
         TitleCaps="False" ResizeMode="NoResize">
     <Grid>
         <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="172" Margin="10,124,0,0" VerticalAlignment="Top" Width="120" BorderThickness="1" HorizontalContentAlignment="Center" />
-        <TextBox x:Name="txtAddGroup" HorizontalAlignment="Left" Height="23" Margin="10,93,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" FontFamily="Segoe UI" KeyDown="txtAddGroup_KeyDown" TextAlignment="Center" GotFocus="TextBox_GotFocus" Controls:TextBoxHelper.Watermark="Group Name"/>
+        <TextBox x:Name="txtAddGroup" HorizontalAlignment="Left" Height="23" Margin="10,93,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" FontFamily="Segoe UI" KeyDown="txtAddGroup_KeyDown" TextAlignment="Left" GotFocus="TextBox_GotFocus" Controls:TextBoxHelper.Watermark="Group Name"/>
         <TextBox x:Name="txtFolderBrowse" HorizontalAlignment="Left" Height="23" Margin="90,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" IsReadOnly="True" Controls:TextBoxHelper.Watermark="Select folder..."/>
         <Button x:Name="btnFolderBrowse" Content="Browse" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="btnFolderBrowse_Click"/>
 
     </Grid>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout Header="Flyout" Position="Right" Width="400" Theme="Adapt" Name="FolderBrowserFlyout">
+            <Controls:Flyout Header="Select a folder" Position="Right" Width="400" Theme="Adapt" Name="FolderBrowserFlyout">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        
+
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="55"/>
@@ -30,10 +30,11 @@
                         Note: Ensure your folder contains only the loose files you wish to contain in your mod, with no subdirectories
                     </TextBlock>
                     <TreeView x:Name="foldersItem"
-                              Width="Auto" Background="#FFFFFFFF"
+                              Width="Auto" 
                               BorderBrush="#FFFFFFFF"
                               Foreground="#FFFFFFFF" Margin="10"
-                              Grid.Row="1">
+                              Grid.Row="1"
+                              SelectedItemChanged="foldersItem_SelectedItemChanged">
                         <TreeView.Resources>
                             <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MetroTreeViewItem}">
                                 <Setter Property="HeaderTemplate">
@@ -50,7 +51,6 @@
                         </TreeView.Resources>
                     </TreeView>
                 </Grid>
-                <!-- Your custom content here -->
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>

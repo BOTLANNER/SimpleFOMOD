@@ -63,6 +63,11 @@ namespace SimpleFOMOD
             //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             //txtFolderBrowse.Text = dialog.SelectedPath.ToString();
         }
+        
+        private void foldersItem_SelectedItemChanged (object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            txtFolderBrowse.Text = e.NewValue.ToString();
+        }
 
         void folder_Expanded(object sender, RoutedEventArgs e)
         {
