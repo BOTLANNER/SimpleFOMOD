@@ -33,6 +33,8 @@ namespace SimpleFOMOD
             txtURL.Opacity = 0.0;
             cboCategory.Opacity = 0.0;
             btnNext.Opacity = 0.0;
+
+            cboCategory.ItemsSource = list;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -67,18 +69,66 @@ namespace SimpleFOMOD
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            // CAST //
-            // INPUT //
-            // TO MOD //
-            // OBJECT //
-            // HERE //
-
+            // Casts the input over to the "Mod" object.
+            Mod mod = new Mod(txtModName.Text,txtAuthor.Text,txtVersion.Text,txtURL.Text,cboCategory.SelectedItem.ToString(), null);
+            MessageBox.Show(mod.ModName + mod.Author + mod.Version + mod.URL + mod.Category);
             // Close this window and open the Module Config Window
             // Would be nice if we could animate a window size change, and then populate it with all the new controls.
             // Switching directly to a new form looks pretty damn hideous with all that flash fade in animation and stuff.
-            ModuleConfigWindow newWin = new ModuleConfigWindow();
-            newWin.Show();
-            this.Close();
+            //ModuleConfigWindow newWin = new ModuleConfigWindow();
+            //newWin.Show();
+            //this.Close();
         }
+
+
+        public List<string> list = new List<string>()
+        {
+            "Ammo",
+            "Animation",
+            "Armour",
+            "Audio - Misc",
+            "Audio - Music",
+            "Audio - SFX",
+            "Audio - Voice",
+            "Bug Fixes",
+            "Buildings",
+            "Cheats and God Items",
+            "Clothing",
+            "Collectibles, Treasure Hunts, and Puzzles",
+            "Companions",
+            "Crafting - Equipment",
+            "Crafting - Home",
+            "Creatures",
+            "ENB Presets",
+            "Environment",
+            "Factions",
+            "Gameplay Effects and Changes",
+            "Hair and Face Models",
+            "Items - Food/Drinks/Chems/etc",
+            "Locations - New",
+            "Locations - Vanilla",
+            "Miscellaneous",
+            "Modders Resources and Tutorials",
+            "Models and Textures",
+            "New Lands",
+            "NPC",
+            "NPC - Vendors",
+            "Overhauls",
+            "Patches",
+            "Performance",
+            "Perks",
+            "Player Homes",
+            "Player Settlement",
+            "Poses",
+            "Quests and Adventures",
+            "Radio",
+            "Skills and Leveling",
+            "User Interface",
+            "Utilities",
+            "Vehicles",
+            "Visuals and Graphics",
+            "Weapons",
+            "Weapons and Armour"
+        };
     }
 }
