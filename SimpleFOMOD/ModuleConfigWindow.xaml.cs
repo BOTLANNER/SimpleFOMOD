@@ -52,14 +52,17 @@ namespace SimpleFOMOD
         }
 
         // Plays the show animation for the given controls.
-        private void DoFadeInAnimation(Control selectedControl)
+        private void DoFadeInAnimation(params Control[] selectedControls)
         {
             // Fade in Animation.
-            DoubleAnimation da = new DoubleAnimation();
-            da.From = 0;
-            da.To = 1;
-            da.Duration = new Duration(TimeSpan.FromSeconds(1.0));
-            selectedControl.BeginAnimation(OpacityProperty, da);
+            foreach (var control in selectedControls)
+            {
+                DoubleAnimation da = new DoubleAnimation();
+                da.From = 0;
+                da.To = 1;
+                da.Duration = new Duration(TimeSpan.FromSeconds(1.0));
+                control.BeginAnimation(OpacityProperty, da);
+            }
         }
 
         // Adds a group to the lstGroup listbox.
