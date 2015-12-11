@@ -16,8 +16,8 @@
 
     </Grid>
     <Controls:MetroWindow.Flyouts>
-        <Controls:FlyoutsControl x:Name="FolderBrowserFlyout">
-            <Controls:Flyout Header="Flyout" Position="Right" Width="200" Theme="Adapt" IsOpen="False">
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Header="Flyout" Position="Right" Width="200" Theme="Adapt" IsOpen="False" Name="FolderBrowserFlyout">
                 <!-- Your custom content here -->
             </Controls:Flyout>
         </Controls:FlyoutsControl>
