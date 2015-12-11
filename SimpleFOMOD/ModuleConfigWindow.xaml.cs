@@ -35,8 +35,7 @@ namespace SimpleFOMOD
                 txtAddGroup.Clear();
             }
         }
-
-        // Removes the existing text from 
+        
         public void FolderBrowse_Click(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -51,6 +50,11 @@ namespace SimpleFOMOD
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
             tb.GotFocus -= TextBox_GotFocus;
+        }
+
+        private void FolderBrowse_Click(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
