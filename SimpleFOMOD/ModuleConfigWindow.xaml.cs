@@ -41,6 +41,8 @@ namespace SimpleFOMOD
             lstSelectedFiles.Opacity = 0;
             btnAddFiles.Opacity = 0;
             btnRemoveFiles.Opacity = 0;
+            rboSelectAny.Opacity = 0;
+            rboSelectOne.Opacity = 0;
 
             foreach (string s in Directory.GetLogicalDrives())
             {
@@ -177,6 +179,8 @@ namespace SimpleFOMOD
             {
                 DoFadeInAnimation(txtAddGroup);
                 DoFadeInAnimation(lstGroup);
+                DoFadeInAnimation(rboSelectAny);
+                DoFadeInAnimation(rboSelectOne);
             }
         }
 
