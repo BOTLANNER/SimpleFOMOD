@@ -11,6 +11,7 @@
     <Grid>
         <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="172" Margin="10,124,0,0" VerticalAlignment="Top" Width="120" BorderThickness="1" HorizontalContentAlignment="Center"/>
         <TextBox x:Name="txtAddGroup" HorizontalAlignment="Left" Height="23" Margin="10,93,0,0" TextWrapping="Wrap" Text="Group Name" VerticalAlignment="Top" Width="120" FontFamily="Segoe UI" KeyDown="txtAddGroup_KeyDown" TextAlignment="Center" GotFocus="TextBox_GotFocus"/>
+        <TextBox x:Name="txtFolderBrowse" HorizontalAlignment="Left" Height="23" Margin="52,18,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="275" IsReadOnly="True" MouseLeftButtonUp="FolderBrowse_Click"/>
 
     </Grid>
 </Controls:MetroWindow>

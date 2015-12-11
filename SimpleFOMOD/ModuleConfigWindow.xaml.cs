@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using WinForms = System.Windows.Forms;
 
 namespace SimpleFOMOD
 {
@@ -33,6 +34,15 @@ namespace SimpleFOMOD
                 lstGroup.Items.Add(txtAddGroup.Text);
                 txtAddGroup.Clear();
             }
+        }
+
+        // Removes the existing text from 
+        public void FolderBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+            txtFolderBrowse.Text = dialog.SelectedPath.ToString();
         }
 
         // Removes the existing text from 
