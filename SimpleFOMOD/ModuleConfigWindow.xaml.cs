@@ -126,6 +126,7 @@ namespace SimpleFOMOD
             // Sets the folderbrowse textbox to the path.
             txtFolderBrowse.Text = ((TreeViewItem)e.NewValue).Tag.ToString();
 
+            lstAllFiles.Items.Clear();
             // Runs a loop for each file in the selected directory, adding it to the AllFiles listbox.
             string file = "";
             foreach (var element in Directory.GetFiles(txtFolderBrowse.Text))
