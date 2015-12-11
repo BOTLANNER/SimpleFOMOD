@@ -69,6 +69,7 @@ namespace SimpleFOMOD
                 {
                     e.Handled = true;
                     lstGroup.Items.Add(txtAddGroup.Text);
+                    lstGroup.SelectedItem = txtAddGroup.Text;
                     txtAddGroup.Clear();
 
                     // Unhides module controls.
@@ -90,6 +91,7 @@ namespace SimpleFOMOD
                 {
                     e.Handled = true;
                     lstModule.Items.Add(txtAddModule.Text);
+                    lstModule.SelectedItem = txtAddModule.Text;
                     txtAddModule.Clear();
 
                     // Unhides file controls.
