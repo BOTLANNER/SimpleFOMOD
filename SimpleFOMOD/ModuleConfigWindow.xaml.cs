@@ -38,6 +38,11 @@ namespace SimpleFOMOD
             btnRemoveFiles.Opacity = 0;
             rboSelectAny.Opacity = 0;
             rboSelectOne.Opacity = 0;
+            btnFolderBrowse.Opacity = 0;
+            txtFolderBrowse.Opacity = 0;
+
+            // Shows the folder controls.
+            DoFadeInAnimation(btnFolderBrowse, txtFolderBrowse);
 
             foreach (string s in Directory.GetLogicalDrives())
             {
@@ -60,7 +65,8 @@ namespace SimpleFOMOD
                 DoubleAnimation da = new DoubleAnimation();
                 da.From = 0;
                 da.To = 1;
-                da.Duration = new Duration(TimeSpan.FromSeconds(1.0));
+                da.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+                da.BeginTime = TimeSpan.FromMilliseconds(200);
                 control.BeginAnimation(OpacityProperty, da);
             }
         }
@@ -80,8 +86,7 @@ namespace SimpleFOMOD
                     // Unhides module controls.
                     if (txtAddModule.Opacity == 0)
                     {
-                        DoFadeInAnimation(txtAddModule);
-                        DoFadeInAnimation(lstModule);
+                        DoFadeInAnimation(txtAddModule, lstModule);
                     }
                 }
             }
@@ -102,10 +107,7 @@ namespace SimpleFOMOD
                     // Unhides file controls.
                     if (lstAllFiles.Opacity == 0)
                     {
-                        DoFadeInAnimation(lstAllFiles);
-                        DoFadeInAnimation(lstSelectedFiles);
-                        DoFadeInAnimation(btnAddFiles);
-                        DoFadeInAnimation(btnRemoveFiles);
+                        DoFadeInAnimation(lstAllFiles, lstSelectedFiles, btnAddFiles, btnRemoveFiles);
                     }
                 }
             }
@@ -145,6 +147,12 @@ namespace SimpleFOMOD
             
         }
         
+        // Opens Image Browser of some kind.
+        private void btnImageBrowse_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         // Sets the active folder textbox to whatever you select in the flyout treeview.
         private void foldersItem_SelectedItemChanged (object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -153,21 +161,23 @@ namespace SimpleFOMOD
 
             lstAllFiles.Items.Clear();
             // Runs a loop for each file in the selected directory, adding it to the AllFiles listbox.
-            string file = "";
-            foreach (var element in Directory.GetFiles(txtFolderBrowse.Text))
+            string file;
+            try
             {
-                file = System.IO.Path.GetFileName(element);
-                lstAllFiles.Items.Add(file);
-            }
+                foreach (var element in Directory.GetFiles(txtFolderBrowse.Text))
+                {
+                    file = System.IO.Path.GetFileName(element);
+                    lstAllFiles.Items.Add(file);
+                }
 
-            // Unhides the group controls.
-            if (txtAddGroup.Opacity == 0)
-            {
-                DoFadeInAnimation(txtAddGroup);
-                DoFadeInAnimation(lstGroup);
-                DoFadeInAnimation(rboSelectAny);
-                DoFadeInAnimation(rboSelectOne);
+                // Unhides the group controls.
+                if (txtAddGroup.Opacity == 0)
+                {
+                    DoFadeInAnimation(txtAddGroup, lstGroup, rboSelectAny, rboSelectOne);
+                }
             }
+            catch (Exception) { }
+
         }
 
         void folder_Expanded(object sender, RoutedEventArgs e)
