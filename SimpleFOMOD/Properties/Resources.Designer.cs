@@ -59,5 +59,24 @@ namespace SimpleFOMOD.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string imgLogo {
+            get {
+                return ResourceManager.GetString("imgLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SimpleFOMOD_Logo {
+            get {
+                object obj = ResourceManager.GetObject("SimpleFOMOD_Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

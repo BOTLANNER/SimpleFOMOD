@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using System.Resources;
 using WinForms = System.Windows.Forms;
 using System.IO;
 using System.Windows.Media.Animation;
+using MahApps.Metro.Controls.Dialogs;
+using System.Reflection;
+using System.Threading;
 
 namespace SimpleFOMOD
 {
@@ -54,6 +59,15 @@ namespace SimpleFOMOD
                 item.Expanded += new RoutedEventHandler(folder_Expanded);
                 foldersItem.Items.Add(item);
             }
+
+        }
+
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            //var dialog = (BaseMetroDialog)this.Resources["CustomDialogTest"];
+
+            //this.ShowMetroDialogAsync(dialog);
         }
 
         // Plays the show animation for the given controls.
@@ -204,5 +218,6 @@ namespace SimpleFOMOD
         }
 
         private object dummyNode = null;
+
     }
 }
