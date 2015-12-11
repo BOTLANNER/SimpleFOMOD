@@ -50,7 +50,7 @@ namespace SimpleFOMOD
         }
 
         // Plays the show animation for the given controls.
-        private void showAnimation(Control selectedControl)
+        private void DoFadeInAnimation(Control selectedControl)
         {
             // Fade in Animation.
             DoubleAnimation da = new DoubleAnimation();
@@ -72,8 +72,11 @@ namespace SimpleFOMOD
                     txtAddGroup.Clear();
 
                     // Unhides module controls.
-                    showAnimation(txtAddModule);
-                    showAnimation(lstModule);
+                    if (txtAddModule.Opacity == 0)
+                    {
+                        DoFadeInAnimation(txtAddModule);
+                        DoFadeInAnimation(lstModule);
+                    }
                 }
             }
         }
@@ -90,26 +93,35 @@ namespace SimpleFOMOD
                     txtAddModule.Clear();
 
                     // Unhides file controls.
-                    showAnimation(lstAllFiles);
-                    showAnimation(lstSelectedFiles);
-                    showAnimation(btnAddFiles);
-                    showAnimation(btnRemoveFiles);
+                    if (lstAllFiles.Opacity == 0)
+                    {
+                        DoFadeInAnimation(lstAllFiles);
+                        DoFadeInAnimation(lstSelectedFiles);
+                        DoFadeInAnimation(btnAddFiles);
+                        DoFadeInAnimation(btnRemoveFiles);
+                    }
                 }
             }
         }
 
-        // Adds files to the Selected Files listbox.
+        // Adds files to the Selected Files listbox and removes from all files.
         private void btnAddFiles_Click(object sender, RoutedEventArgs e)
         {
-            lstSelectedFiles.Items.Add(lstAllFiles.SelectedItem);
-            lstAllFiles.Items.Remove(lstSelectedFiles.SelectedItem);
+            if (lstAllFiles.SelectedIndex >= 0)
+            {
+                lstSelectedFiles.Items.Add(lstAllFiles.SelectedItem);
+                lstAllFiles.Items.Remove(lstAllFiles.SelectedItem);
+            }
         }
 
-        // Adds files to the All Files listbox.
+        // Removes files from selected and adds to All Files listbox.
         private void btnRemoveFiles_Click(object sender, RoutedEventArgs e)
         {
-            lstSelectedFiles.Items.Remove(lstAllFiles.SelectedItem);
-            lstAllFiles.Items.Add(lstSelectedFiles.SelectedItem);
+            if (lstSelectedFiles.SelectedIndex >= 0)
+            {
+                lstAllFiles.Items.Add(lstSelectedFiles.SelectedItem);
+                lstSelectedFiles.Items.Remove(lstSelectedFiles.SelectedItem);
+            }
         }
 
         // Opens the folder browser flyout when you click browse, unless it's already open in which case it closes it.
@@ -140,10 +152,13 @@ namespace SimpleFOMOD
                 file = System.IO.Path.GetFileName(element);
                 lstAllFiles.Items.Add(file);
             }
-            
+
             // Unhides the group controls.
-            showAnimation(txtAddGroup);
-            showAnimation(lstGroup);
+            if (txtAddGroup.Opacity == 0)
+            {
+                DoFadeInAnimation(txtAddGroup);
+                DoFadeInAnimation(lstGroup);
+            }
         }
 
         void folder_Expanded(object sender, RoutedEventArgs e)
