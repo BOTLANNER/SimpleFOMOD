@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using WinForms = System.Windows.Forms;
 using System.IO;
+using System.Windows.Media.Animation;
 
 namespace SimpleFOMOD
 {
@@ -25,6 +26,16 @@ namespace SimpleFOMOD
         public ModuleConfigWindow()
         {
             InitializeComponent();
+
+            // Set hidden controls opacity to 0.
+            txtAddGroup.Opacity = 0;
+            lstGroup.Opacity = 0;
+            txtAddModule.Opacity = 0;
+            lstModule.Opacity = 0;
+            lstAllFiles.Opacity = 0;
+            lstSelectedFiles.Opacity = 0;
+            btnAddFiles.Opacity = 0;
+            btnRemoveFiles.Opacity = 0;
 
             foreach (string s in Directory.GetLogicalDrives())
             {
@@ -38,6 +49,18 @@ namespace SimpleFOMOD
             }
         }
 
+        // Plays the show animation for the given controls.
+        private void showAnimation(Control selectedControl)
+        {
+            // Fade in Animation.
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 0;
+            da.To = 1;
+            da.Duration = new Duration(TimeSpan.FromSeconds(1.0));
+            selectedControl.BeginAnimation(OpacityProperty, da);
+        }
+
+        // Adds a group to the lstGroup listbox.
         private void txtAddGroup_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -45,28 +68,75 @@ namespace SimpleFOMOD
                 e.Handled = true;
                 lstGroup.Items.Add(txtAddGroup.Text);
                 txtAddGroup.Clear();
+
+                // Unhides module controls.
+                showAnimation(txtAddModule);
+                showAnimation(lstModule);
             }
         }
-    
-        // Removes the existing text from 
-        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+
+        // Adds a module to the lstModule listbox.
+        private void txtAddModule_KeyDown(object sender, KeyEventArgs e)
         {
-            TextBox tb = (TextBox)sender;
-            tb.Text = string.Empty;
-            tb.GotFocus -= TextBox_GotFocus;
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+                lstModule.Items.Add(txtAddModule.Text);
+                txtAddModule.Clear();
+
+                // Unhides file controls.
+                showAnimation(lstAllFiles);
+                showAnimation(lstSelectedFiles);
+                showAnimation(btnAddFiles);
+                showAnimation(btnRemoveFiles);
+            }
         }
 
+        // Adds files to the Selected Files listbox.
+        private void btnAddFiles_Click(object sender, RoutedEventArgs e)
+        {
+            lstSelectedFiles.Items.Add(lstAllFiles.SelectedItem);
+            lstAllFiles.Items.Remove(lstSelectedFiles.SelectedItem);
+        }
+
+        // Adds files to the All Files listbox.
+        private void btnRemoveFiles_Click(object sender, RoutedEventArgs e)
+        {
+            lstSelectedFiles.Items.Remove(lstAllFiles.SelectedItem);
+            lstAllFiles.Items.Add(lstSelectedFiles.SelectedItem);
+        }
+
+        // Opens the folder browser flyout when you click browse, unless it's already open in which case it closes it.
         private void btnFolderBrowse_Click(object sender, RoutedEventArgs e)
         {
-            this.FolderBrowserFlyout.IsOpen = true;
-            //var dialog = new System.Windows.Forms.FolderBrowserDialog();
-            //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-            //txtFolderBrowse.Text = dialog.SelectedPath.ToString();
+            if (this.FolderBrowserFlyout.IsOpen != true)
+            {
+                this.FolderBrowserFlyout.IsOpen = true;
+            }
+            else
+            {
+                this.FolderBrowserFlyout.IsOpen = false;
+            }
+            
         }
         
+        // Sets the active folder textbox to whatever you select in the flyout treeview.
         private void foldersItem_SelectedItemChanged (object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            txtFolderBrowse.Text = e.NewValue.ToString();
+            // Sets the folderbrowse textbox to the path.
+            txtFolderBrowse.Text = ((TreeViewItem)e.NewValue).Tag.ToString();
+
+            // Runs a loop for each file in the selected directory, adding it to the AllFiles listbox.
+            string file = "";
+            foreach (var element in Directory.GetFiles(txtFolderBrowse.Text))
+            {
+                file = System.IO.Path.GetFileName(element);
+                lstAllFiles.Items.Add(file);
+            }
+            
+            // Unhides the group controls.
+            showAnimation(txtAddGroup);
+            showAnimation(lstGroup);
         }
 
         void folder_Expanded(object sender, RoutedEventArgs e)
