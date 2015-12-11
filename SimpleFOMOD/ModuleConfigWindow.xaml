@@ -11,7 +11,16 @@
     <Grid>
         <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="172" Margin="10,124,0,0" VerticalAlignment="Top" Width="120" BorderThickness="1" HorizontalContentAlignment="Center" />
         <TextBox x:Name="txtAddGroup" HorizontalAlignment="Left" Height="23" Margin="10,93,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" FontFamily="Segoe UI" KeyDown="txtAddGroup_KeyDown" TextAlignment="Center" GotFocus="TextBox_GotFocus" Controls:TextBoxHelper.Watermark="Group Name"/>
-        <TextBox x:Name="txtFolderBrowse" HorizontalAlignment="Left" Height="23" Margin="52,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" IsReadOnly="True" Controls:TextBoxHelper.Watermark="Click to select folder..." PreviewMouseUp="FolderBrowse_Click"/>
+        <TextBox x:Name="txtFolderBrowse" HorizontalAlignment="Left" Height="23" Margin="90,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" IsReadOnly="True" Controls:TextBoxHelper.Watermark="Select folder..."/>
+        <Button x:Name="btnFolderBrowse" Content="Browse" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="btnFolderBrowse_Click"/>
 
     </Grid>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="FolderBrowserFlyout">
+            <Controls:Flyout Header="Flyout" Position="Right" Width="200" Theme="Adapt" IsOpen="False">
+                <!-- Your custom content here -->
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
 </Controls:MetroWindow>

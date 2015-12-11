@@ -35,15 +35,7 @@ namespace SimpleFOMOD
                 txtAddGroup.Clear();
             }
         }
-        
-        public void FolderBrowse_Click(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            var dialog = new System.Windows.Forms.FolderBrowserDialog();
-            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-            txtFolderBrowse.Text = dialog.SelectedPath.ToString();
-        }
-
+    
         // Removes the existing text from 
         public void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -52,9 +44,12 @@ namespace SimpleFOMOD
             tb.GotFocus -= TextBox_GotFocus;
         }
 
-        private void FolderBrowse_Click(object sender, MouseButtonEventArgs e)
+        private void btnFolderBrowse_Click(object sender, RoutedEventArgs e)
         {
-
+            this.FolderBrowserFlyout.IsOpen = true;
+            //var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+            //txtFolderBrowse.Text = dialog.SelectedPath.ToString();
         }
     }
 }
