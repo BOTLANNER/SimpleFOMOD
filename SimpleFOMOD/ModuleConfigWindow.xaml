@@ -5,9 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleFOMOD"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Mod Configuration" Height="480" Width="960"
-        TitleCaps="False" ResizeMode="NoResize">
+        TitleCaps="False" ResizeMode="NoResize" Loaded="MetroWindow_Loaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--<Dialog:CustomDialog x:Key="CustomDialogTest"
+                                 Title="Check out this sweet fucking dialog."
+                                 x:Name="CustomTestDialog">
+                <Image x:Name="imgLogo" Height="100" Margin="10,17,10,0" VerticalAlignment="Top" Source="Resources/SimpleFOMOD_Logo.png"/>
+            </Dialog:CustomDialog>-->
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <!-- Folder stuff -->
         <TextBox x:Name="txtFolderBrowse" HorizontalAlignment="Left" Height="23" Margin="90,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" IsReadOnly="True" Controls:TextBoxHelper.Watermark="Select folder..."/>
@@ -66,5 +76,9 @@
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
+
+
+    
+    
 
 </Controls:MetroWindow>
