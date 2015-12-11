@@ -24,5 +24,23 @@ namespace SimpleFOMOD
         {
             InitializeComponent();
         }
+
+        private void txtAddGroup_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+                lstGroup.Items.Add(txtAddGroup.Text);
+                txtAddGroup.Clear();
+            }
+        }
+
+        // Removes the existing text from 
+        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox_GotFocus;
+        }
     }
 }

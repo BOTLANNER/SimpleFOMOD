@@ -43,44 +43,51 @@ namespace SimpleFOMOD
             DoubleAnimation da = new DoubleAnimation();
             da.From = 0;
             da.To = 1;
-            da.Duration = new Duration(TimeSpan.FromSeconds(1.5));
+            da.Duration = new Duration(TimeSpan.FromSeconds(1.0));
             // Sets and begins Logo Fade In
-            da.BeginTime = TimeSpan.FromMilliseconds(600);
+            da.BeginTime = TimeSpan.FromMilliseconds(500);
             imgLogo.BeginAnimation(OpacityProperty, da);
             // Name Fade
-            da.BeginTime = TimeSpan.FromMilliseconds(750);
+            da.BeginTime = TimeSpan.FromMilliseconds(650);
             txtModName.BeginAnimation(OpacityProperty, da);
             // Author Fade
-            da.BeginTime = TimeSpan.FromMilliseconds(900);
+            da.BeginTime = TimeSpan.FromMilliseconds(800);
             txtAuthor.BeginAnimation(OpacityProperty, da);
             // Version Fade
-            da.BeginTime = TimeSpan.FromMilliseconds(1050);
+            da.BeginTime = TimeSpan.FromMilliseconds(950);
             txtVersion.BeginAnimation(OpacityProperty, da);
             // URL Fade
-            da.BeginTime = TimeSpan.FromMilliseconds(1200);
+            da.BeginTime = TimeSpan.FromMilliseconds(1100);
             txtURL.BeginAnimation(OpacityProperty, da);
             // Category Fade
-            da.BeginTime = TimeSpan.FromMilliseconds(1350);
+            da.BeginTime = TimeSpan.FromMilliseconds(1250);
             cboCategory.BeginAnimation(OpacityProperty, da);
             // Next Fade
-            da.BeginTime = TimeSpan.FromMilliseconds(1500);
+            da.BeginTime = TimeSpan.FromMilliseconds(1400);
             btnNext.BeginAnimation(OpacityProperty, da);
+        }
+
+        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox_GotFocus;
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             // Casts the input over to the "Mod" object.
             Mod mod = new Mod(txtModName.Text,txtAuthor.Text,txtVersion.Text,txtURL.Text,cboCategory.SelectedItem.ToString(), null);
-            MessageBox.Show(mod.ModName + mod.Author + mod.Version + mod.URL + mod.Category);
+            // MessageBox.Show(mod.ModName + mod.Author + mod.Version + mod.URL + mod.Category);
             // Close this window and open the Module Config Window
             // Would be nice if we could animate a window size change, and then populate it with all the new controls.
             // Switching directly to a new form looks pretty damn hideous with all that flash fade in animation and stuff.
-            //ModuleConfigWindow newWin = new ModuleConfigWindow();
-            //newWin.Show();
-            //this.Close();
+            ModuleConfigWindow newWin = new ModuleConfigWindow();
+            newWin.Show();
+            this.Close();
         }
 
-
+        // List of Categories available on NexusMods - To be used as
         public List<string> list = new List<string>()
         {
             "Ammo",
