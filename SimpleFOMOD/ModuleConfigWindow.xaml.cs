@@ -45,6 +45,10 @@ namespace SimpleFOMOD
             rboSelectOne.Opacity = 0;
             btnFolderBrowse.Opacity = 0;
             txtFolderBrowse.Opacity = 0;
+            txtDestination.Opacity = 0;
+            txtImageBrowse.Opacity = 0;
+            btnImageBrowse.Opacity = 0;
+            lblDestinationHelp.Opacity = 0;
 
             // Shows the folder controls.
             DoFadeInAnimation(btnFolderBrowse, txtFolderBrowse);
@@ -100,7 +104,7 @@ namespace SimpleFOMOD
                     // Unhides module controls.
                     if (txtAddModule.Opacity == 0)
                     {
-                        DoFadeInAnimation(txtAddModule, lstModule);
+                        DoFadeInAnimation(txtAddModule, lstModule, txtImageBrowse, btnImageBrowse);
                     }
                 }
             }
@@ -121,7 +125,7 @@ namespace SimpleFOMOD
                     // Unhides file controls.
                     if (lstAllFiles.Opacity == 0)
                     {
-                        DoFadeInAnimation(lstAllFiles, lstSelectedFiles, btnAddFiles, btnRemoveFiles);
+                        DoFadeInAnimation(lstAllFiles, lstSelectedFiles, btnAddFiles, btnRemoveFiles, txtDestination, lblDestinationHelp);
                     }
                 }
             }

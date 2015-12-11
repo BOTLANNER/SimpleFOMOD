@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Mod Configuration" Height="480" Width="960"
         TitleCaps="False" ResizeMode="NoResize">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <!--<Dialog:CustomDialog x:Key="CustomDialogTest"
@@ -19,7 +19,7 @@
             </Dialog:CustomDialog>-->
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
         <!-- Folder stuff -->
         <TextBox x:Name="txtFolderBrowse" HorizontalAlignment="Left" Height="23" Margin="90,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" IsReadOnly="True" Controls:TextBoxHelper.Watermark="Select folder..."/>
@@ -32,15 +32,15 @@
         <!-- Module stuff -->
         <ListBox x:Name="lstModule" HorizontalAlignment="Left" Height="172" Margin="135,124,0,0" VerticalAlignment="Top" Width="120" BorderThickness="1" HorizontalContentAlignment="Center" />
         <TextBox x:Name="txtAddModule" HorizontalAlignment="Left" Height="23" Margin="135,93,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" FontFamily="Segoe UI" KeyDown="txtAddModule_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Module..."/>
-        <TextBox x:Name="txtImageBrowse" HorizontalAlignment="Left" Height="23" Margin="582,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" IsReadOnly="True" Controls:TextBoxHelper.Watermark="[OPTIONAL] Select Image For This Module..."/>
-        <Button x:Name="btnImageBrowse" Content="Browse" HorizontalAlignment="Left" Margin="502,307,0,0" VerticalAlignment="Top" Width="75" Click="btnImageBrowse_Click" Height="26"/>
+        <TextBox x:Name="txtImageBrowse" HorizontalAlignment="Left" Height="23" Margin="215,347,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" IsReadOnly="True" Controls:TextBoxHelper.Watermark="[OPTIONAL] Select Image For This Module..."/>
+        <Button x:Name="btnImageBrowse" Content="Browse" HorizontalAlignment="Left" Margin="135,347,0,0" VerticalAlignment="Top" Width="75" Click="btnImageBrowse_Click" Height="26"/>
         <!-- File stuff -->
         <ListBox x:Name="lstAllFiles" HorizontalAlignment="Left" Height="235" Margin="491,61,0,0" VerticalAlignment="Top" Width="164" BorderThickness="1" HorizontalContentAlignment="Center" />
         <ListBox x:Name="lstSelectedFiles" HorizontalAlignment="Left" Height="235" Margin="710,61,0,0" VerticalAlignment="Top" Width="164" BorderThickness="1" HorizontalContentAlignment="Center" />
         <Button x:Name="btnAddFiles" Content="&gt;&gt;&gt;" HorizontalAlignment="Left" Margin="660,152,0,0" VerticalAlignment="Top" Width="45" Click="btnAddFiles_Click"/>
         <Button x:Name="btnRemoveFiles" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="660,182,0,0" VerticalAlignment="Top" Width="45" Click="btnRemoveFiles_Click"/>
-        
-
+        <TextBox x:Name="txtDestination" HorizontalAlignment="Left" Height="23" Margin="710,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Controls:TextBoxHelper.Watermark="[OPTIONAL] Destination..."/>
+        <Label x:Name="lblDestinationHelp" Content="?" HorizontalAlignment="Left" Margin="879,307,0,0" VerticalAlignment="Top" Width="23" ToolTip="Specify a destination folder to install the selected file. - Eg. 'Texture' would install that file into 'Data/Texture'" ToolTipService.InitialShowDelay="0"/>
 
     </Grid>
     <Controls:MetroWindow.Flyouts>
