@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimpleFOMOD"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Mod Configuration" Height="355.703" Width="670.026"
+        Title="Mod Configuration" Height="480" Width="960"
         TitleCaps="False" ResizeMode="NoResize">
     <Grid>
         <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="172" Margin="10,124,0,0" VerticalAlignment="Top" Width="120" BorderThickness="1" HorizontalContentAlignment="Center" />
@@ -17,7 +17,39 @@
     </Grid>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout Header="Flyout" Position="Right" Width="200" Theme="Adapt" IsOpen="False" Name="FolderBrowserFlyout">
+            <Controls:Flyout Header="Flyout" Position="Right" Width="400" Theme="Adapt" Name="FolderBrowserFlyout">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="10,10,10,5">
+                        Note: Ensure your folder contains only the loose files you wish to contain in your mod, with no subdirectories
+                    </TextBlock>
+                    <TreeView x:Name="foldersItem"
+                              Width="Auto" Background="#FFFFFFFF"
+                              BorderBrush="#FFFFFFFF"
+                              Foreground="#FFFFFFFF" Margin="10"
+                              Grid.Row="1">
+                        <TreeView.Resources>
+                            <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MetroTreeViewItem}">
+                                <Setter Property="HeaderTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+
+                                                <TextBlock Text="{Binding}" Margin="5,0" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TreeView.Resources>
+                    </TreeView>
+                </Grid>
                 <!-- Your custom content here -->
             </Controls:Flyout>
         </Controls:FlyoutsControl>

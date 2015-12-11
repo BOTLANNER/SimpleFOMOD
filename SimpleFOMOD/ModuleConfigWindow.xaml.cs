@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using WinForms = System.Windows.Forms;
+using System.IO;
 
 namespace SimpleFOMOD
 {
@@ -24,6 +25,17 @@ namespace SimpleFOMOD
         public ModuleConfigWindow()
         {
             InitializeComponent();
+
+            foreach (string s in Directory.GetLogicalDrives())
+            {
+                TreeViewItem item = new TreeViewItem();
+                item.Header = s;
+                item.Tag = s;
+                item.FontWeight = FontWeights.Normal;
+                item.Items.Add(dummyNode);
+                item.Expanded += new RoutedEventHandler(folder_Expanded);
+                foldersItem.Items.Add(item);
+            }
         }
 
         private void txtAddGroup_KeyDown(object sender, KeyEventArgs e)
@@ -51,5 +63,30 @@ namespace SimpleFOMOD
             //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             //txtFolderBrowse.Text = dialog.SelectedPath.ToString();
         }
+
+        void folder_Expanded(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem item = (TreeViewItem)sender;
+            if (item.Items.Count == 1 && item.Items[0] == dummyNode)
+            {
+                item.Items.Clear();
+                try
+                {
+                    foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
+                    {
+                        TreeViewItem subitem = new TreeViewItem();
+                        subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
+                        subitem.Tag = s;
+                        subitem.FontWeight = FontWeights.Normal;
+                        subitem.Items.Add(dummyNode);
+                        subitem.Expanded += new RoutedEventHandler(folder_Expanded);
+                        item.Items.Add(subitem);
+                    }
+                }
+                catch (Exception) { }
+            }
+        }
+
+        private object dummyNode = null;
     }
 }
