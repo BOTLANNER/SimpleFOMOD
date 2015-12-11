@@ -15,6 +15,8 @@
         <!-- Group stuff -->
         <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="172" Margin="10,124,0,0" VerticalAlignment="Top" Width="120" BorderThickness="1" HorizontalContentAlignment="Center" />
         <TextBox x:Name="txtAddGroup" HorizontalAlignment="Left" Height="23" Margin="10,93,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" FontFamily="Segoe UI" KeyDown="txtAddGroup_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Group..."/>
+        <RadioButton x:Name="rboSelectAny" Content="SelectAny - Allow user to select any modules in this  group." HorizontalAlignment="Left" Margin="28,301,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        <RadioButton x:Name="rboSelectOne" Content="SelectOne - Allow user to select only one module from this group." HorizontalAlignment="Left" Margin="28,324,0,0" VerticalAlignment="Top"/>
         <!-- Module stuff -->
         <ListBox x:Name="lstModule" HorizontalAlignment="Left" Height="172" Margin="135,124,0,0" VerticalAlignment="Top" Width="120" BorderThickness="1" HorizontalContentAlignment="Center" />
         <TextBox x:Name="txtAddModule" HorizontalAlignment="Left" Height="23" Margin="135,93,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" FontFamily="Segoe UI" KeyDown="txtAddModule_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Module..."/>
@@ -23,8 +25,7 @@
         <ListBox x:Name="lstSelectedFiles" HorizontalAlignment="Left" Height="235" Margin="710,61,0,0" VerticalAlignment="Top" Width="164" BorderThickness="1" HorizontalContentAlignment="Center" />
         <Button x:Name="btnAddFiles" Content="&gt;&gt;&gt;" HorizontalAlignment="Left" Margin="660,152,0,0" VerticalAlignment="Top" Width="45" Click="btnAddFiles_Click"/>
         <Button x:Name="btnRemoveFiles" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="660,182,0,0" VerticalAlignment="Top" Width="45" Click="btnRemoveFiles_Click"/>
-        <RadioButton x:Name="rboSelectAny" Content="SelectAny - Allow user to select any modules in this  group." HorizontalAlignment="Left" Margin="28,301,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rboSelectOne" Content="SelectOne - Allow user to select only one module from this group." HorizontalAlignment="Left" Margin="28,324,0,0" VerticalAlignment="Top"/>
+        
 
     </Grid>
     <Controls:MetroWindow.Flyouts>
