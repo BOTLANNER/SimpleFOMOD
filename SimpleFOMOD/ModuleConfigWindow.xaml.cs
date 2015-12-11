@@ -65,13 +65,16 @@ namespace SimpleFOMOD
         {
             if (e.Key == Key.Enter)
             {
-                e.Handled = true;
-                lstGroup.Items.Add(txtAddGroup.Text);
-                txtAddGroup.Clear();
+                if (txtAddGroup.Text != "")
+                {
+                    e.Handled = true;
+                    lstGroup.Items.Add(txtAddGroup.Text);
+                    txtAddGroup.Clear();
 
-                // Unhides module controls.
-                showAnimation(txtAddModule);
-                showAnimation(lstModule);
+                    // Unhides module controls.
+                    showAnimation(txtAddModule);
+                    showAnimation(lstModule);
+                }
             }
         }
 
@@ -80,15 +83,18 @@ namespace SimpleFOMOD
         {
             if (e.Key == Key.Enter)
             {
-                e.Handled = true;
-                lstModule.Items.Add(txtAddModule.Text);
-                txtAddModule.Clear();
+                if (txtAddModule.Text != "")
+                {
+                    e.Handled = true;
+                    lstModule.Items.Add(txtAddModule.Text);
+                    txtAddModule.Clear();
 
-                // Unhides file controls.
-                showAnimation(lstAllFiles);
-                showAnimation(lstSelectedFiles);
-                showAnimation(btnAddFiles);
-                showAnimation(btnRemoveFiles);
+                    // Unhides file controls.
+                    showAnimation(lstAllFiles);
+                    showAnimation(lstSelectedFiles);
+                    showAnimation(btnAddFiles);
+                    showAnimation(btnRemoveFiles);
+                }
             }
         }
 
