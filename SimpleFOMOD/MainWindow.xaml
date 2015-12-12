@@ -10,6 +10,22 @@
         TitleCaps="False"
         WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded" ResizeMode="NoResize">
 
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <Button Click="LaunchSimpleFOMODOnNexusMods"
+                    ToolTip="SimpleFOMOD on NexusMods">
+                <Rectangle Width="22"
+                           Height="22"
+                           Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform"
+                                     Visual="{StaticResource appbar_globe_wire}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
+
     <Grid>
         <Image x:Name="imgLogo" Height="100" Margin="10,17,10,0" VerticalAlignment="Top" Source="Resources/SimpleFOMOD_Logo.png"/>
 

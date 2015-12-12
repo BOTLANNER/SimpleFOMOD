@@ -37,6 +37,12 @@ namespace SimpleFOMOD
             cboCategory.ItemsSource = list;
         }
 
+        // Opens NexusMods page in browser.
+        private void LaunchSimpleFOMODOnNexusMods(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/sirdoombox/SimpleFOMOD");
+        }
+
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Fade in Animation.

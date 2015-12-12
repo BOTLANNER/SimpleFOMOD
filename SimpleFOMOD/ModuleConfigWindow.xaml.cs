@@ -39,8 +39,6 @@ namespace SimpleFOMOD
             lstModule.Opacity = 0;
             lstAllFiles.Opacity = 0;
             lstSelectedFiles.Opacity = 0;
-            btnAddFiles.Opacity = 0;
-            btnRemoveFiles.Opacity = 0;
             rboSelectAny.Opacity = 0;
             rboSelectOne.Opacity = 0;
             txtDestination.Opacity = 0;
@@ -48,6 +46,7 @@ namespace SimpleFOMOD
             lblDestinationHelp.Opacity = 0;
             lblFolderBrowse.Opacity = 0;
             txtDescription.Opacity = 0;
+            btnCreate.Opacity = 0;
 
             // Shows the folder controls.
             DoFadeInAnimation(lblFolderBrowse);
@@ -65,6 +64,11 @@ namespace SimpleFOMOD
 
         }
 
+        // Opens NexusMods page in browser.
+        private void LaunchSimpleFOMODOnNexusMods(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/sirdoombox/SimpleFOMOD");
+        }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -124,14 +128,14 @@ namespace SimpleFOMOD
                     // Unhides file controls.
                     if (lstAllFiles.Opacity == 0)
                     {
-                        DoFadeInAnimation(lstAllFiles, lstSelectedFiles, btnAddFiles, btnRemoveFiles, txtDestination, lblDestinationHelp, lblImageBrowse);
+                        DoFadeInAnimation(lstAllFiles, lstSelectedFiles, txtDestination, lblDestinationHelp, lblImageBrowse, btnCreate);
                     }
                 }
             }
         }
 
         // Adds files to the Selected Files listbox and removes from all files.
-        private void btnAddFiles_Click(object sender, RoutedEventArgs e)
+        private void lstAllFiles_DoubleClick(object sender, RoutedEventArgs e)
         {
             if (lstAllFiles.SelectedIndex >= 0)
             {
@@ -141,7 +145,7 @@ namespace SimpleFOMOD
         }
 
         // Removes files from selected and adds to All Files listbox.
-        private void btnRemoveFiles_Click(object sender, RoutedEventArgs e)
+        private void lstSelectedFiles_DoubleClick(object sender, RoutedEventArgs e)
         {
             if (lstSelectedFiles.SelectedIndex >= 0)
             {
@@ -150,7 +154,13 @@ namespace SimpleFOMOD
             }
         }
 
-        
+        // This button creates the things.
+        private void Create_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("HEY ARE YOU SURE? ARE YOU ABSOLUTELY SURE? BE SURE, BECAUSE THIS MIGHT BREAK EVERYTHING.");
+        }
+
+
         // Opens Image Browser of some kind.
         private void ImageBrowse_MouseUp(object sender, RoutedEventArgs e)
         {
