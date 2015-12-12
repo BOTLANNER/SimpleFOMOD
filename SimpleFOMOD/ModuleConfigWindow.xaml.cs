@@ -23,9 +23,6 @@ using System.Threading;
 
 namespace SimpleFOMOD
 {
-    /// <summary>
-    /// Interaction logic for ModuleConfigWindow.xaml
-    /// </summary>
     public partial class ModuleConfigWindow
     {
         public ModuleConfigWindow()
@@ -160,7 +157,6 @@ namespace SimpleFOMOD
             MessageBox.Show("HEY ARE YOU SURE? ARE YOU ABSOLUTELY SURE? BE SURE, BECAUSE THIS MIGHT BREAK EVERYTHING.");
         }
 
-
         // Opens Image Browser of some kind.
         private void ImageBrowse_MouseUp(object sender, RoutedEventArgs e)
         {
@@ -180,7 +176,6 @@ namespace SimpleFOMOD
             }
         }
         
-
         // Sets the active folder textbox to whatever you select in the flyout treeview.
         private void foldersItem_SelectedItemChanged (object sender, RoutedPropertyChangedEventArgs<object> e)
         {
