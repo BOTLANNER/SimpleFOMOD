@@ -152,9 +152,19 @@ namespace SimpleFOMOD
         }
 
         // This button creates the things.
-        private void Create_Click(object sender, RoutedEventArgs e)
+        private async void Create_Click(object sender, RoutedEventArgs e)
         {
-            this.ShowMessageAsync("WARNING", "ARE YOU ABSOLUTELY SURE ? BE SURE, BECAUSE THIS MIGHT BREAK EVERYTHING.");
+            MessageDialogResult result = await this.ShowMessageAsync("WARNING", "ARE YOU ABSOLUTELY SURE? BE SURE, BECAUSE THIS MIGHT BREAK EVERYTHING.", MessageDialogStyle.AffirmativeAndNegative);
+
+            if (result == MessageDialogResult.Negative)
+            {
+                //don't do anything
+            }
+            else
+            {
+                //do the creation stuff
+            }
+            
         }
 
         // Opens Image Browser of some kind.
