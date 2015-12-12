@@ -7,7 +7,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Mod Configuration" Height="427.468" Width="858.861"
+        Title="Mod Configuration" Height="436.192" Width="856.368"
         TitleCaps="False" ResizeMode="NoResize">
 
     <Window.Resources>

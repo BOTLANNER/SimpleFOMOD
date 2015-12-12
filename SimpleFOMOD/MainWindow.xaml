@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimpleFOMOD"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Welcome to SimpleFOMOD" Height="350" Width="413.594"
+        Title="Welcome to SimpleFOMOD" Height="353.704" Width="413.594"
         TitleCaps="False"
         WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded" ResizeMode="NoResize">
 
