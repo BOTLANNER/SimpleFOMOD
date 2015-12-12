@@ -154,7 +154,7 @@ namespace SimpleFOMOD
         // This button creates the things.
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("HEY ARE YOU SURE? ARE YOU ABSOLUTELY SURE? BE SURE, BECAUSE THIS MIGHT BREAK EVERYTHING.");
+            this.ShowMessageAsync("WARNING", "ARE YOU ABSOLUTELY SURE ? BE SURE, BECAUSE THIS MIGHT BREAK EVERYTHING.");
         }
 
         // Opens Image Browser of some kind.
