@@ -43,15 +43,14 @@ namespace SimpleFOMOD
             btnRemoveFiles.Opacity = 0;
             rboSelectAny.Opacity = 0;
             rboSelectOne.Opacity = 0;
-            btnFolderBrowse.Opacity = 0;
-            txtFolderBrowse.Opacity = 0;
             txtDestination.Opacity = 0;
-            txtImageBrowse.Opacity = 0;
-            btnImageBrowse.Opacity = 0;
+            lblImageBrowse.Opacity = 0;
             lblDestinationHelp.Opacity = 0;
+            lblFolderBrowse.Opacity = 0;
+            txtDescription.Opacity = 0;
 
             // Shows the folder controls.
-            DoFadeInAnimation(btnFolderBrowse, txtFolderBrowse);
+            DoFadeInAnimation(lblFolderBrowse);
 
             foreach (string s in Directory.GetLogicalDrives())
             {
@@ -104,7 +103,7 @@ namespace SimpleFOMOD
                     // Unhides module controls.
                     if (txtAddModule.Opacity == 0)
                     {
-                        DoFadeInAnimation(txtAddModule, lstModule, txtImageBrowse, btnImageBrowse);
+                        DoFadeInAnimation(txtAddModule, txtDescription, lstModule, lblImageBrowse);
                     }
                 }
             }
@@ -151,8 +150,15 @@ namespace SimpleFOMOD
             }
         }
 
-        // Opens the folder browser flyout when you click browse, unless it's already open in which case it closes it.
-        private void btnFolderBrowse_Click(object sender, RoutedEventArgs e)
+        
+        // Opens Image Browser of some kind.
+        private void ImageBrowse_MouseUp(object sender, RoutedEventArgs e)
+        {
+            // Open image browser here.
+        }
+
+        // Opens the folder Browser
+        private void FolderBrowse_MouseUp(object sender, RoutedEventArgs e)
         {
             if (this.FolderBrowserFlyout.IsOpen != true)
             {
@@ -162,27 +168,21 @@ namespace SimpleFOMOD
             {
                 this.FolderBrowserFlyout.IsOpen = false;
             }
-            
         }
         
-        // Opens Image Browser of some kind.
-        private void btnImageBrowse_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         // Sets the active folder textbox to whatever you select in the flyout treeview.
         private void foldersItem_SelectedItemChanged (object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             // Sets the folderbrowse textbox to the path.
-            txtFolderBrowse.Text = ((TreeViewItem)e.NewValue).Tag.ToString();
+            lblFolderBrowse.Content = ((TreeViewItem)e.NewValue).Tag.ToString();
 
             lstAllFiles.Items.Clear();
             // Runs a loop for each file in the selected directory, adding it to the AllFiles listbox.
             string file;
             try
             {
-                foreach (var element in Directory.GetFiles(txtFolderBrowse.Text))
+                foreach (var element in Directory.GetFiles(lblFolderBrowse.Content.ToString()))
                 {
                     file = System.IO.Path.GetFileName(element);
                     lstAllFiles.Items.Add(file);
