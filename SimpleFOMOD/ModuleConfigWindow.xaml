@@ -7,7 +7,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Mod Configuration" Height="469.841" Width="882.54"
+        Title="Mod Configuration" Height="427.468" Width="858.861"
         TitleCaps="False" ResizeMode="NoResize">
 
     <Window.Resources>
@@ -26,20 +26,20 @@
         <!-- Group stuff -->
         <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" />
         <TextBox x:Name="txtAddGroup" HorizontalAlignment="Left" Height="23" Margin="10,44,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" KeyDown="txtAddGroup_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Group..."/>
-        <RadioButton x:Name="rboSelectAny" Content="SelectAny" HorizontalAlignment="Left" Margin="25,277,0,0" VerticalAlignment="Top" IsChecked="True" ToolTip="Allow user to select any modules in this  group." ToolTipService.InitialShowDelay="0"/>
-        <RadioButton x:Name="rboSelectOne" Content="SelectOne" HorizontalAlignment="Left" Margin="106,277,0,0" VerticalAlignment="Top" ToolTip="Allow user to select only one module from this group." ToolTipService.InitialShowDelay="0"/>
+        <RadioButton x:Name="rboSelectAny" Content="SelectAny" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" IsChecked="True" ToolTip="Allow user to select any modules in this  group." ToolTipService.InitialShowDelay="0"/>
+        <RadioButton x:Name="rboSelectOne" Content="SelectOne" HorizontalAlignment="Left" Margin="91,277,0,0" VerticalAlignment="Top" ToolTip="Allow user to select only one module from this group." ToolTipService.InitialShowDelay="0"/>
         <!-- Module stuff -->
-        <ListBox x:Name="lstModule" HorizontalAlignment="Left" Height="197" Margin="234,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" />
-        <TextBox x:Name="txtAddModule" HorizontalAlignment="Left" Height="23" Margin="234,44,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" KeyDown="txtAddModule_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Module..."/>
-        <Label x:Name="lblImageBrowse" Content="[OPTIONAL] Click Here To Select An Image For This Module..." HorizontalAlignment="Left" Margin="10,406,0,0" VerticalAlignment="Top" Width="424" MouseUp="ImageBrowse_MouseUp"/>
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="93" Margin="10,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="424" Controls:TextBoxHelper.Watermark="Set Description For Selected Module..."/>
+        <ListBox x:Name="lstModule" HorizontalAlignment="Left" Height="197" Margin="215,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" />
+        <TextBox x:Name="txtAddModule" HorizontalAlignment="Left" Height="23" Margin="215,44,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" KeyDown="txtAddModule_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Module..."/>
+        <Label x:Name="lblImageBrowse" Content="[OPTIONAL] Click Here To Select An Image For This Module..." HorizontalAlignment="Left" Margin="432,10,0,0" VerticalAlignment="Top" Width="413" MouseUp="ImageBrowse_MouseUp"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="93" Margin="10,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" Controls:TextBoxHelper.Watermark="Set Description For Selected Module..."/>
         <!-- File stuff -->
-        <ListBox x:Name="lstAllFiles" HorizontalAlignment="Left" Height="422" Margin="450,10,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1" HorizontalContentAlignment="Center" />
-        <ListBox x:Name="lstSelectedFiles" HorizontalAlignment="Left" Height="390" Margin="686,10,0,0" VerticalAlignment="Top" Width="178" BorderThickness="1" HorizontalContentAlignment="Center" />
-        <Button x:Name="btnAddFiles" Content="&gt;&gt;&gt;" HorizontalAlignment="Left" Margin="636,182,0,0" VerticalAlignment="Top" Width="45" Click="btnAddFiles_Click"/>
-        <Button x:Name="btnRemoveFiles" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="636,228,0,0" VerticalAlignment="Top" Width="45" Click="btnRemoveFiles_Click"/>
-        <TextBox x:Name="txtDestination" HorizontalAlignment="Left" Height="23" Margin="686,406,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Controls:TextBoxHelper.Watermark="[OPTIONAL] Destination..."/>
-        <Label x:Name="lblDestinationHelp" Content="?" HorizontalAlignment="Left" Margin="841,405,0,0" VerticalAlignment="Top" Width="23" ToolTip="Specify a destination folder to install the selected file. - Eg. 'Texture' would install that file into 'Data/Texture'" ToolTipService.InitialShowDelay="0"/>
+        <ListBox x:Name="lstAllFiles" HorizontalAlignment="Left" Height="349" Margin="431,44,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1" HorizontalContentAlignment="Center" />
+        <ListBox x:Name="lstSelectedFiles" HorizontalAlignment="Left" Height="318" Margin="667,44,0,0" VerticalAlignment="Top" Width="178" BorderThickness="1" HorizontalContentAlignment="Center" />
+        <Button x:Name="btnAddFiles" Content="&gt;&gt;&gt;" HorizontalAlignment="Left" Margin="617,182,0,0" VerticalAlignment="Top" Width="45" Click="btnAddFiles_Click" Style="{DynamicResource SquareButtonStyle}"/>
+        <Button x:Name="btnRemoveFiles" Content="&lt;&lt;&lt;" HorizontalAlignment="Left" Margin="617,215,0,0" VerticalAlignment="Top" Width="45" Click="btnRemoveFiles_Click" Style="{DynamicResource SquareButtonStyle}"/>
+        <TextBox x:Name="txtDestination" HorizontalAlignment="Left" Height="23" Margin="668,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" Controls:TextBoxHelper.Watermark="[OPTIONAL] Destination..."/>
+        <Label x:Name="lblDestinationHelp" Content="?" HorizontalAlignment="Left" Margin="822,367,0,0" VerticalAlignment="Top" Width="23" ToolTip="Specify a destination folder to install the selected file. - Eg. 'Texture' would install that file into 'Data/Texture'" ToolTipService.InitialShowDelay="0"/>
 
 
 

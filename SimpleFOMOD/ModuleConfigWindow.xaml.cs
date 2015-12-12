@@ -103,7 +103,7 @@ namespace SimpleFOMOD
                     // Unhides module controls.
                     if (txtAddModule.Opacity == 0)
                     {
-                        DoFadeInAnimation(txtAddModule, txtDescription, lstModule, lblImageBrowse);
+                        DoFadeInAnimation(txtAddModule, txtDescription, lstModule);
                     }
                 }
             }
@@ -124,7 +124,7 @@ namespace SimpleFOMOD
                     // Unhides file controls.
                     if (lstAllFiles.Opacity == 0)
                     {
-                        DoFadeInAnimation(lstAllFiles, lstSelectedFiles, btnAddFiles, btnRemoveFiles, txtDestination, lblDestinationHelp);
+                        DoFadeInAnimation(lstAllFiles, lstSelectedFiles, btnAddFiles, btnRemoveFiles, txtDestination, lblDestinationHelp, lblImageBrowse);
                     }
                 }
             }
