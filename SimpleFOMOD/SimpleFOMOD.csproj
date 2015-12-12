@@ -61,29 +61,29 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Configs\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataObjects.cs" />
-    <Compile Include="FileIO.cs" />
-    <Compile Include="ModuleConfigWindow.xaml.cs">
+    <Compile Include="Class Files\DataObjects.cs" />
+    <Compile Include="Class Files\FileIO.cs" />
+    <Compile Include="Windows\ModuleConfigWindow.xaml.cs">
       <DependentUpon>ModuleConfigWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XMLgenerator.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Class Files\XMLgenerator.cs" />
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Configs\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ModuleConfigWindow.xaml">
+    <Page Include="Windows\ModuleConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,7 +110,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="Configs\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -119,7 +119,7 @@
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Configs\App.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SimpleFOMOD_Logo.png" />
@@ -133,6 +133,7 @@
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
