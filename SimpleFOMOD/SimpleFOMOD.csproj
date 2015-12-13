@@ -65,6 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class Files\Checker.cs" />
     <Compile Include="Class Files\DataObjects.cs" />
     <Compile Include="Class Files\FileIO.cs" />
     <Compile Include="ModuleConfigWindow.xaml.cs">
