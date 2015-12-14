@@ -26,12 +26,16 @@ namespace SimpleFOMOD
 {
     public partial class ModuleConfigWindow
     {
+        private Mod mod = new Mod();
+
         public ModuleConfigWindow()
         {
             InitializeComponent();
 
+            lstGroup.ItemsSource = mod.Groups;
+
             // Set hidden controls opacity to 0.
-            txtAddGroup.Opacity = 0;
+             txtAddGroup.Opacity = 0;
             lstGroup.Opacity = 0;
             txtAddModule.Opacity = 0;
             lstModule.Opacity = 0;
@@ -91,14 +95,16 @@ namespace SimpleFOMOD
         }
 
         // Adds a group to the lstGroup listbox.
-        private void txtAddGroup_KeyDown(object sender, KeyEventArgs e)
+        public void txtAddGroup_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 if (txtAddGroup.Text != "")
                 {
                     e.Handled = true;
-                    lstGroup.Items.Add(txtAddGroup.Text);
+                    //lstGroup.Items.Add(txtAddGroup.Text);
+                    Group tempGroup = new Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne");
+                    mod.Groups.Add(tempGroup);
                     lstGroup.SelectedItem = txtAddGroup.Text;
                     txtAddGroup.Clear();
 
