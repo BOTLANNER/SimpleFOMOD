@@ -26,7 +26,7 @@ namespace SimpleFOMOD
 {
     public partial class ModuleConfigWindow
     {
-        public static Mod mod = new Mod();
+        public static Mod mod;
 
         public ModuleConfigWindow()
         {
