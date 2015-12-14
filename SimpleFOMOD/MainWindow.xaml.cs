@@ -34,6 +34,13 @@ namespace SimpleFOMOD
             cboCategory.Opacity = 0.0;
             btnNext.Opacity = 0.0;
 
+            // TESTING VALUES //
+            txtAuthor.Text = "Test Author";
+            txtModName.Text = "Test Mod Name";
+            txtURL.Text = "nexusmods.com/mods/";
+            txtVersion.Text = "1.0";
+            // TESTING VALUES //
+
             cboCategory.ItemsSource = list;
 
         }

@@ -97,6 +97,7 @@ namespace SimpleFOMOD
         // Adds a group to the lstGroup listbox.
         public void txtAddGroup_KeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.Key == Key.Enter)
             {
                 if (txtAddGroup.Text != "")
