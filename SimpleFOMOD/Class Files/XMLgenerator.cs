@@ -94,7 +94,7 @@ namespace SimpleFOMOD
             }
 
 
-            /* ---- COMMENTED ALL THIS SHIT OUT BECAUSE HOPEFULLY MY REWRITE WORKS, IF IT DOESN'T I MIGHT NEED SOME OF THIS. -----
+            /* ---- COMMENTED ALL THIS SHIT OUT BECAUSE HOPEFULLY MY REWRITE WORKS, IF IT DOESN'T I MIGHT NEED SOME OF THIS. ----
 
             // Construct the "Optional" group XElement
             XElement optionalGroup = new XElement("group", new XAttribute("name", "Optional Files"), new XAttribute("type", "SelectAny"),

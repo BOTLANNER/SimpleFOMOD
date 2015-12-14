@@ -8,26 +8,38 @@ namespace SimpleFOMOD.Class_Files
 {
     class Checker
     {
-        public static bool URLCheck(string url)
+        public static bool ModNameCheck (string modName)
         {
-            if (url != "")
+            if(modName.Length > 0 && modName.Length < 30)
             {
-                if (url.Contains("nexusmods.com") && url.Contains("/mods/"))
-                {
-                    return true;
-                }
-                return false;
+                return true;
+            }
+            return false;
+        }
+
+        public static bool AuthorNameCheck (string authName)
+        {
+            if (authName.Length > 0 && authName.Length < 30)
+            {
+                return true;
             }
             return false;
         }
 
         public static bool VerNumberCheck(string verNumber)
         {
-            if (verNumber != "")
+            if (verNumber.Length > 0 && verNumber.Length < 10)
             {
-                double Num;
-                bool isNum = double.TryParse(verNumber, out Num);
-                if (isNum)
+                return true;
+            }
+            return false;
+        }
+
+        public static bool URLCheck(string url)
+        {
+            if (url != "")
+            {
+                if (url.Contains("nexusmods.com") && url.Contains("/mods/"))
                 {
                     return true;
                 }

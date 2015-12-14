@@ -22,7 +22,7 @@ namespace SimpleFOMOD
 
     public partial class MainWindow : MetroWindow
     {
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +35,6 @@ namespace SimpleFOMOD
             btnNext.Opacity = 0.0;
 
             cboCategory.ItemsSource = list;
-
 
         }
 
@@ -62,8 +61,9 @@ namespace SimpleFOMOD
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            // List of all controls on the page.
             List<Control> controlList = new List<Control>();
-            controlList.Add(txtModName); controlList.Add(txtAuthor); controlList.Add(txtVersion); 
+            controlList.Add(txtModName); controlList.Add(txtAuthor); controlList.Add(txtVersion);
             controlList.Add(txtURL); controlList.Add(cboCategory); controlList.Add(btnNext);
 
             // Variables
@@ -87,30 +87,39 @@ namespace SimpleFOMOD
             }
         }
 
-        private void btnNext_Click(object sender, RoutedEventArgs e) // Basic as fuck validation and error catching.
+        private void txtModName_LostFocus(object sender, RoutedEventArgs e)
         {
-            bool all_ok = true;
-
             // Checks if modname is blank.
-            if (txtModName.Text != "") { DoInputOK(lblNameError); }
+            if (Checker.ModNameCheck(txtModName.Text)) { DoInputOK(lblNameError); all_ok = true; }
             else { DoInputNotOK(txtModName, lblNameError); all_ok = false; }
-            
+        }
+
+        private void txtAuthor_LostFocus(object sender, RoutedEventArgs e)
+        {
             // Checks if author name is blank.
-            if (txtAuthor.Text != "") { DoInputOK(lblAuthorError); }
+            if (Checker.AuthorNameCheck(txtAuthor.Text)) { DoInputOK(lblAuthorError); all_ok = true; }
             else { DoInputNotOK(txtAuthor, lblAuthorError); all_ok = false; }
-            
+        }
+
+        private void txtVersion_LostFocus(object sender, RoutedEventArgs e)
+        {
             // Checks if the version number is blank or isn't a number.
-            if (Checker.VerNumberCheck(txtVersion.Text)){ DoInputOK(lblVerError); }
+            if (Checker.VerNumberCheck(txtVersion.Text)) { DoInputOK(lblVerError); all_ok = true; }
             else { DoInputNotOK(txtVersion, lblVerError); all_ok = false; }
+        }
 
+        private void txtURL_LostFocus(object sender, RoutedEventArgs e)
+        {
             // checks if the URL is blank or invalid.
-            if (Checker.URLCheck(txtURL.Text)){ DoInputOK(lblURLError); }
+            if (Checker.URLCheck(txtURL.Text)) { DoInputOK(lblURLError); all_ok = true; }
             else { DoInputNotOK(txtURL, lblURLError); all_ok = false; }
+        }
 
-            // Checks if a category has been selected.
-            if (cboCategory.SelectedIndex != -1) { DoInputOK(lblCatError); }
-            else { cboCategory.Focus(); DoFadeInAnimation(lblCatError); all_ok = false; }
+        // Used to check if any of the inputs are okay.
+        bool all_ok = false;
 
+        private void btnNext_Click(object sender, RoutedEventArgs e) // if all the inputs are bueno, this should run.
+        {
             if (all_ok) // Checks that there aren't any errors on the page.
             {
                 // Casts the input over to the "Mod" object.
@@ -121,21 +130,25 @@ namespace SimpleFOMOD
                 newWin.Show();
                 this.Close();
             }
+            else
+            {
+                // Something goes here to tell the user to make sure all the inputs are bueno.
+            }
         }
 
         // Do this if the input is correct.
-        private void DoInputOK (Control inputLabel)
+        public void DoInputOK(Control inputLabel)
         {
             inputLabel.Visibility = Visibility.Hidden; inputLabel.Opacity = 0;
         }
 
         // Do this if the input is incorrect.
-        private void DoInputNotOK (TextBox inputControl, Control inputLabel)
+        public void DoInputNotOK(TextBox inputControl, Control inputLabel)
         {
-            inputControl.Focus(); inputControl.Clear(); DoFadeInAnimation(inputLabel); inputLabel.Visibility = Visibility.Visible;
+            DoFadeInAnimation(inputLabel); inputLabel.Visibility = Visibility.Visible;
         }
 
-        // List of Categories available on NexusMods - To be used as
+        // List of Categories available on NexusMods
         public List<string> list = new List<string>()
         {
             "Ammo",

@@ -20,6 +20,7 @@ using System.Windows.Media.Animation;
 using MahApps.Metro.Controls.Dialogs;
 using System.Reflection;
 using System.Threading;
+using SimpleFOMOD.Class_Files;
 
 namespace SimpleFOMOD
 {
