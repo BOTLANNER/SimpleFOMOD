@@ -130,7 +130,7 @@ namespace SimpleFOMOD
                 newWin.Show();
                 this.Close();
             }
-            else
+            else // If there are any errors at all with the input, this will fire.
             {
                 // Something goes here to tell the user to make sure all the inputs are bueno.
             }
