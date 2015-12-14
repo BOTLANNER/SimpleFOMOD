@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Windows.Media.Animation;
 using SimpleFOMOD.Class_Files;
+using System.Collections.ObjectModel;
 
 namespace SimpleFOMOD
 {
@@ -130,7 +131,7 @@ namespace SimpleFOMOD
             if (all_ok) // Checks that there aren't any errors on the page.
             {
                 // Casts the input over to the "Mod" object.
-                ModuleConfigWindow.mod = new Mod(txtModName.Text, txtAuthor.Text, txtVersion.Text, txtURL.Text, cboCategory.SelectedItem.ToString(), null);
+                ModuleConfigWindow.mod = new Mod(txtModName.Text, txtAuthor.Text, txtVersion.Text, txtURL.Text, cboCategory.SelectedItem.ToString(), new ObservableCollection<Group>());
 
                 // Close this window and open the Module Config Window
                 ModuleConfigWindow newWin = new ModuleConfigWindow();

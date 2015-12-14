@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace SimpleFOMOD
 {  
@@ -14,11 +15,11 @@ namespace SimpleFOMOD
         public string Version { get; set; }
         public string URL { get; set; }
         public string Category { get; set; }
-        public List<Group> Groups { get; set; }
+        public ObservableCollection<Group> Groups { get; set; }
 
         public Mod() { }
 
-        public Mod(string modname, string author, string version, string url, string category, List<Group> groups)
+        public Mod(string modname, string author, string version, string url, string category, ObservableCollection<Group> groups)
         {
             ModName = modname;
             Author = author;
@@ -27,7 +28,7 @@ namespace SimpleFOMOD
             Category = category;
             Groups = groups;
         }
-
+        /*
         public void AddFileToMod(Mod mod, string groupName, string moduleName, mFile file)
         {
             mod.Groups.Find(x => x.GroupName == groupName).Modules.Find(x => x.ModuleName == moduleName).Files.Add(file);
@@ -46,13 +47,14 @@ namespace SimpleFOMOD
             group.Modules.Remove(oldModule);
             group.Modules.Add(module);
         }
+        */
     }
 
     public class Group
     {
         public string GroupName { get; set; }
         public string Type { get; set; }
-        public List<Module> Modules { get; set; }
+        public ObservableCollection<Module> Modules { get; set; }
 
         public Group() { }
 
@@ -67,23 +69,24 @@ namespace SimpleFOMOD
             GroupName = groupname;
         }
 
-        public Group(string groupname, string type, List<Module> modules)
+        public Group(string groupname, string type, ObservableCollection<Module> modules)
         {
             GroupName = groupname;
             Type = type;
             Modules = modules;
         }
-
+        /*
         public void AddModuleToGroup(Mod mod, string groupName, Module module)
         {
             mod.Groups.Find(x => x.GroupName == groupName).Modules.Add(module);
         }
+        */
     }
 
     public class Module
     {
         public string ModuleName { get; set; }
-        public List<mFile> Files { get; set; } 
+        public ObservableCollection<mFile> Files { get; set; } 
         public string Description { get; set; }
         public string LocalImagePath { get; set; }
         public string RelativeImagePath { get; set; }
@@ -95,7 +98,7 @@ namespace SimpleFOMOD
             ModuleName = modulename;
         }
 
-        public Module(string modulename, List<mFile> files, string description, string imagePath)
+        public Module(string modulename, ObservableCollection<mFile> files, string description, string imagePath)
         {
             ModuleName = modulename;
             Files = files;
