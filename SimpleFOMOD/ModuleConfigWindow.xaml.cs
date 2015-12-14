@@ -105,6 +105,7 @@ namespace SimpleFOMOD
                     e.Handled = true;
                     //lstGroup.Items.Add(txtAddGroup.Text);
                     Group tempGroup = new Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne");
+                    mod.Groups = new List<Group>();
                     mod.Groups.Add(tempGroup);
                     lstGroup.SelectedItem = txtAddGroup.Text;
                     txtAddGroup.Clear();
