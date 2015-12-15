@@ -39,8 +39,8 @@
 
         <!-- Error Labels -->
         <Label x:Name="lblNameError" Content="X" HorizontalAlignment="Left" Margin="346,130,0,0" VerticalAlignment="Top" Opacity="0" ToolTip="Please enter a valid Mod name - 30 Characters max." Visibility="Hidden" ToolTipService.InitialShowDelay="0"/>
-        <Label x:Name="lblAuthorError" Content="X" HorizontalAlignment="Left" Margin="346,161,0,0" VerticalAlignment="Top" Opacity="0" ToolTip="Please enter your username." Visibility="Hidden" ToolTipService.InitialShowDelay="0"/>
-        <Label x:Name="lblVerError" Content="X" HorizontalAlignment="Left" Margin="346,192,0,0" VerticalAlignment="Top" Opacity="0" ToolTip="Please enter a version number - numbers 1-9, A, B, V and periods only." Visibility="Hidden" ToolTipService.InitialShowDelay="0"/>
+        <Label x:Name="lblAuthorError" Content="X" HorizontalAlignment="Left" Margin="346,161,0,0" VerticalAlignment="Top" Opacity="0" ToolTip="Please enter a valid username." Visibility="Hidden" ToolTipService.InitialShowDelay="0"/>
+        <Label x:Name="lblVerError" Content="X" HorizontalAlignment="Left" Margin="346,192,0,0" VerticalAlignment="Top" Opacity="0" ToolTip="Please enter a version number - numbers 0-9, A, B, V and periods only." Visibility="Hidden" ToolTipService.InitialShowDelay="0"/>
         <Label x:Name="lblURLError" Content="X" HorizontalAlignment="Left" Margin="346,223,0,0" VerticalAlignment="Top" Opacity="0" ToolTip="Please enter a valid NexusMods mod page URL." Visibility="Hidden" ToolTipService.InitialShowDelay="0"/>
         <Label x:Name="lblCatError" Content="X" HorizontalAlignment="Left" Margin="346,255,0,0" VerticalAlignment="Top" Opacity="0" ToolTip="Please select a category." Visibility="Hidden" ToolTipService.InitialShowDelay="0"/>
     </Grid>

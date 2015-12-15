@@ -36,10 +36,10 @@ namespace SimpleFOMOD
             btnNext.Opacity = 0.0;
 
             // TESTING VALUES //
-            txtAuthor.Text = "Test Author";
+            txtAuthor.Text = "TestAuthor";
             txtModName.Text = "Test Mod Name";
             txtURL.Text = "nexusmods.com/mods/";
-            txtVersion.Text = "1.0";
+            txtVersion.Text = "v1.07.5ab";
             // TESTING VALUES //
 
             cboCategory.ItemsSource = list;
@@ -98,28 +98,28 @@ namespace SimpleFOMOD
         private void txtModName_LostFocus(object sender, RoutedEventArgs e)
         {
             // Checks if modname is blank.
-            if (Checker.ModNameCheck(txtModName.Text)) { DoInputOK(lblNameError); all_ok = true; }
+            if (MainWindowChecker.ModNameCheck(txtModName.Text)) { DoInputOK(lblNameError); all_ok = true; }
             else { DoInputNotOK(txtModName, lblNameError); all_ok = false; }
         }
 
         private void txtAuthor_LostFocus(object sender, RoutedEventArgs e)
         {
             // Checks if author name is blank.
-            if (Checker.AuthorNameCheck(txtAuthor.Text)) { DoInputOK(lblAuthorError); all_ok = true; }
+            if (MainWindowChecker.AuthorNameCheck(txtAuthor.Text)) { DoInputOK(lblAuthorError); all_ok = true; }
             else { DoInputNotOK(txtAuthor, lblAuthorError); all_ok = false; }
         }
 
         private void txtVersion_LostFocus(object sender, RoutedEventArgs e)
         {
             // Checks if the version number is blank or isn't a number.
-            if (Checker.VerNumberCheck(txtVersion.Text)) { DoInputOK(lblVerError); all_ok = true; }
+            if (MainWindowChecker.VerNumberCheck(txtVersion.Text)) { DoInputOK(lblVerError); all_ok = true; }
             else { DoInputNotOK(txtVersion, lblVerError); all_ok = false; }
         }
 
         private void txtURL_LostFocus(object sender, RoutedEventArgs e)
         {
             // checks if the URL is blank or invalid.
-            if (Checker.URLCheck(txtURL.Text)) { DoInputOK(lblURLError); all_ok = true; }
+            if (MainWindowChecker.URLCheck(txtURL.Text)) { DoInputOK(lblURLError); all_ok = true; }
             else { DoInputNotOK(txtURL, lblURLError); all_ok = false; }
         }
 

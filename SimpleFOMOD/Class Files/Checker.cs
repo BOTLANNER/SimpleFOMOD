@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SimpleFOMOD.Class_Files
 {
-    class Checker
+    class MainWindowChecker
     {
         public static bool ModNameCheck (string modName)
         {
@@ -21,7 +22,12 @@ namespace SimpleFOMOD.Class_Files
         {
             if (authName.Length > 0 && authName.Length < 30)
             {
-                return true;
+                Regex regex = new Regex("^[a-z0-9._-]+$", RegexOptions.IgnoreCase);
+                if (regex.IsMatch(authName))
+                {
+                    return true;
+                }
+                return false;
             }
             return false;
         }
@@ -30,7 +36,12 @@ namespace SimpleFOMOD.Class_Files
         {
             if (verNumber.Length > 0 && verNumber.Length < 10)
             {
-                return true;
+                Regex regex = new Regex("^[abv0-9.]+$", RegexOptions.IgnoreCase);
+                if (regex.IsMatch(verNumber))
+                {
+                    return true;
+                }
+                return false;
             }
             return false;
         }
@@ -48,4 +59,10 @@ namespace SimpleFOMOD.Class_Files
             return false;
         }
     }
+
+    public class ModuleConfigWindowChecker
+    {
+
+    }
+
 }
