@@ -33,7 +33,7 @@ namespace SimpleFOMOD
             InitializeComponent();
 
             lstGroup.DataContext = mod.Groups;
-            this.DataContext = this;
+            this.DataContext = mod;
 
             // Set hidden controls opacity to 0.
             txtAddGroup.Opacity = 0;
