@@ -32,8 +32,8 @@ namespace SimpleFOMOD
         {
             InitializeComponent();
 
-            lstGroup.DataContext = mod.Groups;
-            this.DataContext = mod;
+            lstGroup.ItemsSource = mod.Groups;
+            lstGroup.DataContext = mod;
 
             // Set hidden controls opacity to 0.
             txtAddGroup.Opacity = 0;
@@ -104,9 +104,7 @@ namespace SimpleFOMOD
                 if (txtAddGroup.Text != "")
                 {
                     e.Handled = true;
-                    //lstGroup.Items.Add(txtAddGroup.Text);
-                    Group tempGroup = new Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne");
-                    mod.Groups.Add(tempGroup);
+                    mod.Groups.Add(new Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne"));
                     lstGroup.SelectedItem = txtAddGroup.Text;
                     txtAddGroup.Clear();
 

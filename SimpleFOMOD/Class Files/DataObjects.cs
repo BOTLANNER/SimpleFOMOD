@@ -28,6 +28,14 @@ namespace SimpleFOMOD
             Category = category;
             Groups = groups;
         }
+        public Mod(string modname, string author, string version, string url, string category)
+        {
+            ModName = modname;
+            Author = author;
+            Version = version;
+            URL = url;
+            Category = category;
+        }
         /*
         public void AddFileToMod(Mod mod, string groupName, string moduleName, mFile file)
         {
