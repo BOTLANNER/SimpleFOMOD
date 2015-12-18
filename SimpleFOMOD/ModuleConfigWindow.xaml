@@ -7,8 +7,8 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Mod Configuration" Height="436.192" Width="816.488"
-        TitleCaps="False" ResizeMode="NoResize">
+        Title="SimpleFOMOD - Mod Configuration" Height="436.192" Width="816.488"
+        TitleCaps="False" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowTransitionsEnabled="False">
 
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
