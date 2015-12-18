@@ -226,10 +226,14 @@ namespace SimpleFOMOD
         {
             if (e.Key == Key.Enter)
             {
-                if(txtDescription.Text != "" && lstModule.SelectedIndex != -1)
+                if (txtDescription.Text != "" && lstModule.SelectedIndex != -1)
                 {
                     mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Description = txtDescription.Text;
                     Keyboard.ClearFocus();
+                }
+                else
+                {
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Description = null;
                 }
             }
         }
@@ -243,6 +247,10 @@ namespace SimpleFOMOD
                 {
                     mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = txtDestination.Text;
                     Keyboard.ClearFocus();
+                }
+                else
+                {
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = null;
                 }
             }
         }
@@ -265,10 +273,10 @@ namespace SimpleFOMOD
             }
         }
 
-        // Updates the relevant properties when you change the selected module.
+        // Updates the relevant properties when you change the selected file.
         private void lstSelectedFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Changes the "Description" property of the selected module if there is a module selected.
+            // Changes the "Destination" property of the file list.
             if (lstSelectedFiles.SelectedIndex != -1)
             {
                 if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination != "")

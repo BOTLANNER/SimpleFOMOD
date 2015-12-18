@@ -46,7 +46,7 @@ namespace SimpleFOMOD
                 foreach (var module in group.Modules)
                 {
                     XElement tempModule = new XElement("plugin", new XAttribute("name", module.ModuleName));
-                    if (module.Description != "")
+                    if (module.Description != null)
                     {
                         tempModule.Add(new XElement("description", module.Description));
                     }
@@ -60,7 +60,11 @@ namespace SimpleFOMOD
 
                     foreach (var file in module.Files)
                     {
-                        XElement tempFiles = new XElement("file", new XAttribute("source", group.GroupName + @"\" + module.ModuleName + @"\" + file.FileName),new XAttribute("destination",  file.Destination + @"\" + file.FileName));
+                        XElement tempFiles = new XElement("file", new XAttribute("source", group.GroupName + @"\" + module.ModuleName + @"\" + file.FileName));
+                        if(file.Destination != null)
+                        {
+                            tempFiles.Add(new XAttribute("destination", file.Destination + @"\" + file.FileName));
+                        }
                         tempModuleFiles.Add(tempFiles);
                     }
                     tempGroup.Add(tempModule);
