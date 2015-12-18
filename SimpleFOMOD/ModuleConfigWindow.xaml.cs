@@ -36,20 +36,20 @@ namespace SimpleFOMOD
             lstGroup.DataContext = mod;
 
             // Set hidden controls opacity to 0.
-            txtAddGroup.Opacity = 0;
-            lstGroup.Opacity = 0;
-            txtAddModule.Opacity = 0;
-            lstModule.Opacity = 0;
-            lstAllFiles.Opacity = 0;
-            lstSelectedFiles.Opacity = 0;
-            rboSelectAny.Opacity = 0;
-            rboSelectOne.Opacity = 0;
-            txtDestination.Opacity = 0;
-            lblImageBrowse.Opacity = 0;
-            lblDestinationHelp.Opacity = 0;
-            lblFolderBrowse.Opacity = 0;
-            txtDescription.Opacity = 0;
-            btnCreate.Opacity = 0;
+            txtAddGroup.Opacity = 0; txtAddGroup.Visibility = System.Windows.Visibility.Hidden;
+            lstGroup.Opacity = 0; lstGroup.Visibility = System.Windows.Visibility.Hidden;
+            txtAddModule.Opacity = 0; txtAddModule.Visibility = System.Windows.Visibility.Hidden;
+            lstModule.Opacity = 0; lstModule.Visibility = System.Windows.Visibility.Hidden;
+            lstAllFiles.Opacity = 0; lstAllFiles.Visibility = System.Windows.Visibility.Hidden;
+            lstSelectedFiles.Opacity = 0; lstSelectedFiles.Visibility = System.Windows.Visibility.Hidden;
+            rboSelectAny.Opacity = 0; rboSelectAny.Visibility = System.Windows.Visibility.Hidden;
+            rboSelectOne.Opacity = 0; rboSelectOne.Visibility = System.Windows.Visibility.Hidden;
+            txtDestination.Opacity = 0; txtDestination.Visibility = System.Windows.Visibility.Hidden;
+            lblImageBrowse.Opacity = 0; lblImageBrowse.Visibility = System.Windows.Visibility.Hidden;
+            lblDestinationHelp.Opacity = 0; lblDestinationHelp.Visibility = System.Windows.Visibility.Hidden;
+            lblFolderBrowse.Opacity = 0; lblFolderBrowse.Visibility = System.Windows.Visibility.Hidden;
+            txtDescription.Opacity = 0; txtDescription.Visibility = System.Windows.Visibility.Hidden;
+            btnCreate.Opacity = 0; btnCreate.Visibility = System.Windows.Visibility.Hidden;
 
             // Shows the folder controls.
             DoFadeInAnimation(lblFolderBrowse);
@@ -73,6 +73,13 @@ namespace SimpleFOMOD
             System.Diagnostics.Process.Start("https://github.com/sirdoombox/SimpleFOMOD");
         }
 
+        // Opens a help window
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            HelpWindow newWin = new HelpWindow();
+            newWin.Show();
+        }
+
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //var dialog = (BaseMetroDialog)this.Resources["CustomDialogTest"];
@@ -86,6 +93,7 @@ namespace SimpleFOMOD
             // Fade in Animation.
             foreach (var control in selectedControls)
             {
+                control.Visibility = System.Windows.Visibility.Visible;
                 DoubleAnimation da = new DoubleAnimation();
                 da.From = 0;
                 da.To = 1;

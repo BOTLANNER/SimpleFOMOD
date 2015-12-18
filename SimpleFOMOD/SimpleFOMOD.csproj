@@ -68,10 +68,17 @@
     <Compile Include="Class Files\Checker.cs" />
     <Compile Include="Class Files\DataObjects.cs" />
     <Compile Include="Class Files\FileIO.cs" />
+    <Compile Include="HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModuleConfigWindow.xaml.cs">
       <DependentUpon>ModuleConfigWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class Files\XMLgenerator.cs" />
+    <Page Include="HelpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

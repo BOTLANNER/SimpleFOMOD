@@ -28,10 +28,14 @@
     
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
+            <Button x:Name="btnHelp"
+                    Click="Help_Click"
+                    Content="HELP"/>
             <Button x:Name="btnCreate"
                     Click="Create_Click"
                     Content="CREATE"
-                    ToolTip="Create your FOMOD Installation."/>
+                    ToolTip="Create your FOMOD Installation."
+                    Visibility="Hidden"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
 
