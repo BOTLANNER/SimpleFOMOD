@@ -59,29 +59,14 @@ namespace SimpleFOMOD
         */
         public class Group
         {
-            public string ModName { get; set; }
             public string GroupName { get; set; }
             public string Type { get; set; }
             public ObservableCollection<Module> Modules { get; set; }
 
             public Group() { }
 
-            public Group(string modname, string groupname)
-            {
-                ModName = modname;
-                GroupName = groupname;
-            }
-
-            public Group(string modname, string groupname, string type)
-            {
-                ModName = modname;
-                Type = type;
-                GroupName = groupname;
-            }
-
-            public Group(string modname, string groupname, string type, ObservableCollection<Module> modules)
-            {
-                ModName = modname;
+            public Group(string groupname, string type, ObservableCollection<Module> modules)
+            {     
                 GroupName = groupname;
                 Type = type;
                 Modules = modules;
@@ -89,7 +74,6 @@ namespace SimpleFOMOD
 
             public class Module
             {
-                public string GroupName { get; set; }
                 public string ModuleName { get; set; }
                 public ObservableCollection<mFile> Files { get; set; }
                 public string Description { get; set; }
@@ -98,15 +82,13 @@ namespace SimpleFOMOD
 
                 public Module() { }
 
-                public Module(string groupname, string modulename)
+                public Module(string modulename)
                 {
-                    GroupName = groupname;
                     ModuleName = modulename;
                 }
 
-                public Module(string groupname, string modulename, ObservableCollection<mFile> files, string description, string imagePath)
-                {
-                    GroupName = groupname;
+                public Module( string modulename, ObservableCollection<mFile> files, string description, string imagePath)
+                {                    
                     ModuleName = modulename;
                     Files = files;
                     Description = description;
@@ -116,7 +98,6 @@ namespace SimpleFOMOD
 
                 public class mFile
                 {
-                    public string ModuleName { get; set; }
                     public string FileName { get; set; }
                     public string Destination { get; set; }
 
@@ -124,7 +105,6 @@ namespace SimpleFOMOD
 
                     public mFile(string modulename, string filename, string destination)
                     {
-                        ModuleName = modulename;
                         FileName = filename;
                         Destination = destination;
                     }

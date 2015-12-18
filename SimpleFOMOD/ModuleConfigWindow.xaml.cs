@@ -54,8 +54,9 @@ namespace SimpleFOMOD
             txtDescription.Opacity = 0; txtDescription.Visibility = System.Windows.Visibility.Hidden;
             btnCreate.Opacity = 0; btnCreate.Visibility = System.Windows.Visibility.Hidden;
 
-            DataContext = this;
+            this.DataContext = mod;
             lstGroup.ItemsSource = mod.Groups;
+            
             
 
             // Shows the folder controls.
@@ -121,8 +122,8 @@ namespace SimpleFOMOD
                 {
                     e.Handled = true;
                     //mod.Groups.Add(new Mod.Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne"));
-                    mod.Groups.Add(new Mod.Group(mod.ModName, txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new ObservableCollection<Mod.Group.Module>()));
-                    lstGroup.SelectedItem = txtAddGroup.Text;
+                    mod.Groups.Add(new Mod.Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new ObservableCollection<Mod.Group.Module>()));
+                    lstGroup.SelectedItem = 0;
                     txtAddGroup.Clear();
 
                     // Unhides module controls.
@@ -134,6 +135,12 @@ namespace SimpleFOMOD
             }
         }
 
+        // Updates lstModules when the selected item changes.
+        private void lstGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lstModule.ItemsSource = mod.Groups[lstGroup.SelectedIndex].Modules;
+        }
+
         // Adds a module to the lstModule listbox.
         private void txtAddModule_KeyDown(object sender, KeyEventArgs e)
         {
@@ -142,8 +149,8 @@ namespace SimpleFOMOD
                 if (txtAddModule.Text != "")
                 {
                     e.Handled = true;
-                    lstModule.Items.Add(txtAddModule.Text);
-                    lstModule.SelectedItem = txtAddModule.Text;
+                    mod.Groups[lstGroup.SelectedIndex].Modules.Add(new Mod.Group.Module(txtAddModule.Text));
+                    lstModule.SelectedItem = 0;
                     txtAddModule.Clear();
 
                     // Unhides file controls.
@@ -264,6 +271,7 @@ namespace SimpleFOMOD
         }
 
         private object dummyNode = null;
+
 
     }
 }

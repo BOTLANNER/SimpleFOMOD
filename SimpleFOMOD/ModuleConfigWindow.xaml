@@ -61,7 +61,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>-->
-        <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center">
+        <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" SelectionChanged="lstGroup_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding GroupName}"></TextBlock>
@@ -72,7 +72,13 @@
         <RadioButton x:Name="rboSelectAny" Content="SelectAny" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" IsChecked="True" ToolTip="Allow user to select any modules in this  group." ToolTipService.InitialShowDelay="0"/>
         <RadioButton x:Name="rboSelectOne" Content="SelectOne" HorizontalAlignment="Left" Margin="91,277,0,0" VerticalAlignment="Top" ToolTip="Allow user to select only one module from this group." ToolTipService.InitialShowDelay="0"/>
         <!-- Module stuff -->
-        <ListBox x:Name="lstModule" HorizontalAlignment="Left" Height="197" Margin="215,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" />
+        <ListBox x:Name="lstModule" HorizontalAlignment="Left" Height="197" Margin="215,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding ModuleName}"></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>>
         <TextBox x:Name="txtAddModule" HorizontalAlignment="Left" Height="23" Margin="215,44,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" KeyDown="txtAddModule_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Module..."/>
         <Label x:Name="lblImageBrowse" Content="[OPTIONAL] Click Here To Select An Image For This Module..." HorizontalAlignment="Left" Margin="431,10,-38,0" VerticalAlignment="Top" Width="413" MouseUp="ImageBrowse_MouseUp"/>
         <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="93" Margin="10,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" Controls:TextBoxHelper.Watermark="Set Description For Selected Module..."/>
