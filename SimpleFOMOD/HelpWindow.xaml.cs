@@ -22,6 +22,7 @@ namespace SimpleFOMOD
     {
         public HelpWindow()
         {
+            
             InitializeComponent();
         }
     }

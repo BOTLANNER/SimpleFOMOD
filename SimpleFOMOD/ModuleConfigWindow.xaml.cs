@@ -39,25 +39,25 @@ namespace SimpleFOMOD
             InitializeComponent();
 
             // Set hidden controls opacity to 0.
-            txtAddGroup.Opacity = 0; txtAddGroup.Visibility = System.Windows.Visibility.Hidden;
-            lstGroup.Opacity = 0; lstGroup.Visibility = System.Windows.Visibility.Hidden;
-            txtAddModule.Opacity = 0; txtAddModule.Visibility = System.Windows.Visibility.Hidden;
-            lstModule.Opacity = 0; lstModule.Visibility = System.Windows.Visibility.Hidden;
-            lstAllFiles.Opacity = 0; lstAllFiles.Visibility = System.Windows.Visibility.Hidden;
-            lstSelectedFiles.Opacity = 0; lstSelectedFiles.Visibility = System.Windows.Visibility.Hidden;
-            rboSelectAny.Opacity = 0; rboSelectAny.Visibility = System.Windows.Visibility.Hidden;
-            rboSelectOne.Opacity = 0; rboSelectOne.Visibility = System.Windows.Visibility.Hidden;
-            txtDestination.Opacity = 0; txtDestination.Visibility = System.Windows.Visibility.Hidden;
-            lblImageBrowse.Opacity = 0; lblImageBrowse.Visibility = System.Windows.Visibility.Hidden;
-            lblDestinationHelp.Opacity = 0; lblDestinationHelp.Visibility = System.Windows.Visibility.Hidden;
-            lblFolderBrowse.Opacity = 0; lblFolderBrowse.Visibility = System.Windows.Visibility.Hidden;
-            txtDescription.Opacity = 0; txtDescription.Visibility = System.Windows.Visibility.Hidden;
-            btnCreate.Opacity = 0; btnCreate.Visibility = System.Windows.Visibility.Hidden;
+            txtAddGroup.Opacity = 0; txtAddGroup.Visibility = Visibility.Hidden;
+            lstGroup.Opacity = 0; lstGroup.Visibility = Visibility.Hidden;
+            txtAddModule.Opacity = 0; txtAddModule.Visibility = Visibility.Hidden;
+            lstModule.Opacity = 0; lstModule.Visibility = Visibility.Hidden;
+            lstAllFiles.Opacity = 0; lstAllFiles.Visibility = Visibility.Hidden;
+            lstSelectedFiles.Opacity = 0; lstSelectedFiles.Visibility = Visibility.Hidden;
+            rboSelectAny.Opacity = 0; rboSelectAny.Visibility = Visibility.Hidden;
+            rboSelectOne.Opacity = 0; rboSelectOne.Visibility = Visibility.Hidden;
+            txtDestination.Opacity = 0; txtDestination.Visibility = Visibility.Hidden;
+            lblImageBrowse.Opacity = 0; lblImageBrowse.Visibility = Visibility.Hidden;
+            lblDestinationHelp.Opacity = 0; lblDestinationHelp.Visibility = Visibility.Hidden;
+            lblFolderBrowse.Opacity = 0; lblFolderBrowse.Visibility = Visibility.Hidden;
+            txtDescription.Opacity = 0; txtDescription.Visibility = Visibility.Hidden;
+            btnCreate.Opacity = 0; btnCreate.Visibility = Visibility.Hidden;
+            lblDestSaveConfirm.Opacity = 0; lblDestSaveConfirm.Visibility = Visibility.Hidden;
+            lblDescSaveConfirm.Opacity = 0; lblDescSaveConfirm.Visibility = Visibility.Hidden;
 
             this.DataContext = mod;
             lstGroup.ItemsSource = mod.Groups;
-            
-            
 
             // Shows the folder controls.
             DoFadeInAnimation(lblFolderBrowse);
@@ -85,6 +85,7 @@ namespace SimpleFOMOD
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             HelpWindow newWin = new HelpWindow();
+            newWin.Owner = this;
             newWin.Show();
         }
 
@@ -110,6 +111,25 @@ namespace SimpleFOMOD
                 da.BeginTime = TimeSpan.FromMilliseconds(200);
                 control.BeginAnimation(OpacityProperty, da);
             }
+        }
+
+        private void DoConfirmationAnimation(Control control)
+        {
+            control.Visibility = Visibility.Visible;
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 0;
+            da.To = 0.25;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.6));
+            control.BeginAnimation(OpacityProperty, da);
+            DoubleAnimation db = new DoubleAnimation();
+            db.From = 0.25;
+            db.To = 0;
+            db.Duration = new Duration(TimeSpan.FromSeconds(0.6));
+            da.Completed += (sender, eargs) =>
+            {
+                control.BeginAnimation(OpacityProperty, db);
+                control.Visibility = Visibility.Hidden;
+            };
         }
 
         // Adds a group to the lstGroup listbox.
@@ -142,6 +162,7 @@ namespace SimpleFOMOD
             if (lstGroup.SelectedIndex != -1)
             {
                 lstModule.ItemsSource = mod.Groups[lstGroup.SelectedIndex].Modules;
+                lstModule.SelectedIndex = 0;
             }
             else
             {
@@ -229,6 +250,7 @@ namespace SimpleFOMOD
                 if (txtDescription.Text != "" && lstModule.SelectedIndex != -1)
                 {
                     mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Description = txtDescription.Text;
+                    DoConfirmationAnimation(lblDescSaveConfirm);
                     Keyboard.ClearFocus();
                 }
                 else
@@ -246,6 +268,7 @@ namespace SimpleFOMOD
                 if (txtDestination.Text != "" && lstSelectedFiles.SelectedIndex != -1)
                 {
                     mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = txtDestination.Text;
+                    DoConfirmationAnimation(lblDestSaveConfirm);
                     Keyboard.ClearFocus();
                 }
                 else

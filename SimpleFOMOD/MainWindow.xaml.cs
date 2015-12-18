@@ -135,7 +135,9 @@ namespace SimpleFOMOD
 
                 // Close this window and open the Module Config Window
                 ModuleConfigWindow newWin = new ModuleConfigWindow();
+                newWin.Owner = this;
                 newWin.Show();
+                newWin.Owner = null;
                 this.Close();
             }
             else // If there are any errors at all with the input, this will fire.

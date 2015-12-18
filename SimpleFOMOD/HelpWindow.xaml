@@ -7,7 +7,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="SimpleFOMOD - Help" Height="300" Width="300"
-        TitleCaps="False" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowTransitionsEnabled="False">
+        TitleCaps="False" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowTransitionsEnabled="False" WindowStartupLocation="CenterOwner">
     <Grid>
         
     </Grid>

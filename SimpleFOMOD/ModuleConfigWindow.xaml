@@ -8,7 +8,7 @@
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="SimpleFOMOD - Mod Configuration" Height="436.192" Width="816.488"
-        TitleCaps="False" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowTransitionsEnabled="False">
+        TitleCaps="False" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowTransitionsEnabled="False" WindowStartupLocation="CenterOwner">
 
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
@@ -93,7 +93,9 @@
         </ListBox>
         <TextBox x:Name="txtDestination" HorizontalAlignment="Left" Height="23" Margin="617,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Controls:TextBoxHelper.Watermark="[OPTIONAL] Destination..." KeyDown="txtDestination_KeyDown"/>
         <Label x:Name="lblDestinationHelp" Content="?" HorizontalAlignment="Left" Margin="775,367,0,0" VerticalAlignment="Top" Width="23" ToolTip="Specify a destination folder to install the selected file. - Eg. 'Texture' would install that file into 'Data/Texture'" ToolTipService.InitialShowDelay="0"/>
-
+        <!-- CONFIRMATION LABELS -->
+        <Label x:Name="lblDescSaveConfirm" Content="Description Saved" HorizontalAlignment="Left" Margin="131,331,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
+        <Label x:Name="lblDestSaveConfirm" Content="Destination Saved" HorizontalAlignment="Left" Margin="658,367,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
 
 
 
