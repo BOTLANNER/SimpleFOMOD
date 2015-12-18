@@ -37,7 +37,7 @@ namespace SimpleFOMOD
             // Creates the container to be inserted into moduleconfigXML XDoc.
             XElement xmlChunk = new XElement("optionalFileGroups", new XAttribute("order", "Explicit"));
 
-            // Tentative as fuck moduleConfigXML generation - Can't test until all data stuff is squared away.
+            // XML Generation for the entirety of the dynamic part of the ModuleConfig.XML file - Absolute spaghetti mess, but it works perfectly.
             foreach (var group in mod.Groups)
             {
                 XElement tempGroup = new XElement("group", new XAttribute("name", group.GroupName), new XAttribute("type", group.Type));
@@ -64,6 +64,10 @@ namespace SimpleFOMOD
                         if(file.Destination != null)
                         {
                             tempFiles.Add(new XAttribute("destination", file.Destination + @"\" + file.FileName));
+                        }
+                        else
+                        {
+                            tempFiles.Add(new XAttribute("destination", file.FileName));
                         }
                         tempModuleFiles.Add(tempFiles);
                     }

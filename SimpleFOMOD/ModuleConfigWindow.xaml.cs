@@ -23,6 +23,7 @@ using System.Threading;
 using SimpleFOMOD.Class_Files;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
 
 namespace SimpleFOMOD
 {
@@ -75,62 +76,8 @@ namespace SimpleFOMOD
 
         }
 
-        // Opens NexusMods page in browser.
-        private void LaunchSimpleFOMODOnNexusMods(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/sirdoombox/SimpleFOMOD");
-        }
-
-        // Opens a help window
-        private void Help_Click(object sender, RoutedEventArgs e)
-        {
-            HelpWindow newWin = new HelpWindow();
-            newWin.Owner = this;
-            newWin.Show();
-        }
-
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            //var dialog = (BaseMetroDialog)this.Resources["CustomDialogTest"];
-
-            //this.ShowMetroDialogAsync(dialog);
-            
-        }
-
-        // Plays the show animation for the given controls.
-        private void DoFadeInAnimation(params Control[] selectedControls)
-        {
-            // Fade in Animation.
-            foreach (var control in selectedControls)
-            {
-                control.Visibility = System.Windows.Visibility.Visible;
-                DoubleAnimation da = new DoubleAnimation();
-                da.From = 0;
-                da.To = 1;
-                da.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-                da.BeginTime = TimeSpan.FromMilliseconds(200);
-                control.BeginAnimation(OpacityProperty, da);
-            }
-        }
-
-        private void DoConfirmationAnimation(Control control)
-        {
-            control.Visibility = Visibility.Visible;
-            DoubleAnimation da = new DoubleAnimation();
-            da.From = 0;
-            da.To = 0.25;
-            da.Duration = new Duration(TimeSpan.FromSeconds(0.6));
-            control.BeginAnimation(OpacityProperty, da);
-            DoubleAnimation db = new DoubleAnimation();
-            db.From = 0.25;
-            db.To = 0;
-            db.Duration = new Duration(TimeSpan.FromSeconds(0.6));
-            da.Completed += (sender, eargs) =>
-            {
-                control.BeginAnimation(OpacityProperty, db);
-                control.Visibility = Visibility.Hidden;
-            };
-        }
+        
+        // ---------------------------------- G R O U P         S T U F F ---------------------------------- //
 
         // Adds a group to the lstGroup listbox.
         public void txtAddGroup_KeyDown(object sender, KeyEventArgs e)
@@ -221,6 +168,9 @@ namespace SimpleFOMOD
             }
         }
 
+
+        // ---------------------------------- M O D U L E        S T U F F ---------------------------------- //
+
         // Adds a module to the lstModule listbox.
         private void txtAddModule_KeyDown(object sender, KeyEventArgs e)
         {
@@ -294,7 +244,32 @@ namespace SimpleFOMOD
                     txtDescription.Text = "";
                 }
             }
+            // Sets the selectedfile index to 1 if it has any entries
+            if (lstSelectedFiles.SelectedIndex != -1)
+            {
+                lstSelectedFiles.SelectedIndex = 0;
+            }
+
         }
+
+        // Removes the selected module when you press delete.e
+        public void lstModule_DeleteDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                if (lstModule.SelectedIndex != -1)
+                {
+                    foreach (var files in mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files)
+                    {
+                        lstAllFiles.Items.Add(files.FileName);
+                    }
+                    mod.Groups[lstGroup.SelectedIndex].Modules.RemoveAt(lstModule.SelectedIndex);
+                }
+            }
+        }
+
+
+        // ---------------------------------- F I L E         S T U F F ---------------------------------- //
 
         // Updates the relevant properties when you change the selected file.
         private void lstSelectedFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -309,22 +284,6 @@ namespace SimpleFOMOD
                 else
                 {
                     txtDescription.Text = "";
-                }
-            }
-        }
-
-        // Removes the selected module when you press delete.
-        public void lstModule_DeleteDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Delete)
-            {
-                if (lstModule.SelectedIndex != -1)
-                {
-                    foreach(var files in mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files)
-                    {
-                        lstAllFiles.Items.Add(files.FileName);
-                    }
-                    mod.Groups[lstGroup.SelectedIndex].Modules.RemoveAt(lstModule.SelectedIndex);
                 }
             }
         }
@@ -349,6 +308,109 @@ namespace SimpleFOMOD
             }
         }
 
+        // Opens Image Browser of some kind.
+        private void ImageBrowse_MouseUp(object sender, RoutedEventArgs e)
+        {
+            if (lstModule.SelectedIndex != -1)
+            {
+                // Create file dialog instance.
+                OpenFileDialog openImageDialog = new OpenFileDialog();
+                openImageDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
+                openImageDialog.FilterIndex = 1;
+                openImageDialog.Multiselect = false;
+
+                // Store the selected image in the selectedImage textbox.
+                if (openImageDialog.ShowDialog() == true)
+                {
+                    lblImageBrowse.Content = openImageDialog.FileName;
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].LocalImagePath = openImageDialog.FileName;
+                }
+            }
+        }
+
+        // Opens the folder Browser
+        private void FolderBrowse_MouseUp(object sender, RoutedEventArgs e)
+        {
+            if (this.FolderBrowserFlyout.IsOpen != true)
+            {
+                this.FolderBrowserFlyout.IsOpen = true;
+            }
+            else
+            {
+                this.FolderBrowserFlyout.IsOpen = false;
+            }
+        }
+
+
+        // ---------------------------------- O T H E R         S T U F F ---------------------------------- //
+
+        // Attempting to write an update method to handle all the goings on
+        private void UpdateWindow(Control control)
+        {
+            if(control == lstGroup)
+            {
+                
+            }
+        }
+
+        // Opens NexusMods page in browser.
+        private void LaunchSimpleFOMODOnNexusMods(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/sirdoombox/SimpleFOMOD");
+        }
+
+        // Opens a help window
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            HelpWindow newWin = new HelpWindow();
+            newWin.Owner = this;
+            newWin.Show();
+        }
+
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            //var dialog = (BaseMetroDialog)this.Resources["CustomDialogTest"];
+
+            //this.ShowMetroDialogAsync(dialog);
+
+        }
+
+        // Plays the show animation for the given controls.
+        private void DoFadeInAnimation(params Control[] selectedControls)
+        {
+            // Fade in Animation.
+            foreach (var control in selectedControls)
+            {
+                control.Visibility = System.Windows.Visibility.Visible;
+                DoubleAnimation da = new DoubleAnimation();
+                da.From = 0;
+                da.To = 1;
+                da.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+                da.BeginTime = TimeSpan.FromMilliseconds(200);
+                control.BeginAnimation(OpacityProperty, da);
+            }
+        }
+
+        private void DoConfirmationAnimation(Control control)
+        {
+            control.Visibility = Visibility.Visible;
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 0;
+            da.To = 0.25;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.6));
+            control.BeginAnimation(OpacityProperty, da);
+            DoubleAnimation db = new DoubleAnimation();
+            db.From = 0.25;
+            db.To = 0;
+            db.Duration = new Duration(TimeSpan.FromSeconds(0.6));
+            da.Completed += (sender, eargs) =>
+            {
+                control.BeginAnimation(OpacityProperty, db);
+                control.Visibility = Visibility.Hidden;
+            };
+        }
+
         // This button creates the things.
         private async void Create_Click(object sender, RoutedEventArgs e)
         {
@@ -364,28 +426,9 @@ namespace SimpleFOMOD
                 XMLgenerator.GenerateInfoXML(lblFolderBrowse.Content.ToString(), mod);
                 XMLgenerator.GenerateModuleConfigXML(lblFolderBrowse.Content.ToString(), mod);
             }
-            
+
         }
 
-        // Opens Image Browser of some kind.
-        private void ImageBrowse_MouseUp(object sender, RoutedEventArgs e)
-        {
-            // Open image browser here.
-        }
-
-        // Opens the folder Browser
-        private void FolderBrowse_MouseUp(object sender, RoutedEventArgs e)
-        {
-            if (this.FolderBrowserFlyout.IsOpen != true)
-            {
-                this.FolderBrowserFlyout.IsOpen = true;
-            }
-            else
-            {
-                this.FolderBrowserFlyout.IsOpen = false;
-            }
-        }
-        
         // Sets the active folder textbox to whatever you select in the flyout treeview.
         private void foldersItem_SelectedItemChanged (object sender, RoutedPropertyChangedEventArgs<object> e)
         {
