@@ -51,17 +51,17 @@ namespace SimpleFOMOD
                         Directory.CreateDirectory(tempModuleFolder);
                     }
 
-                    // Copies the selected image to the "fomod\images" folder.
-                    if (module.LocalImagePath != "")
-                    {
-                        File.Copy(module.LocalImagePath, imageFolder + Path.GetFileName(module.LocalImagePath));
-                    }
+                    //// Copies the selected image to the "fomod\images" folder.
+                    //if (module.LocalImagePath != "")
+                    //{
+                    //    File.Copy(module.LocalImagePath, imageFolder + Path.GetFileName(module.LocalImagePath));
+                    //}
 
                     // Moves all associated files into module folders.
                     foreach (var file in module.Files)
                     {
                         string tempFileName = file.FileName;
-                        File.Move(activeFolder + tempFileName, tempModuleFolder + tempFileName);
+                        File.Move(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempFileName);
                     }
                 }
             }

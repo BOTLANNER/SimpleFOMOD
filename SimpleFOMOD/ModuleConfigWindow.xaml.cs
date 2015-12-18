@@ -329,7 +329,9 @@ namespace SimpleFOMOD
             }
             else
             {
-                //do the creation stuff
+                FileIO.fileManipulation(lblFolderBrowse.Content.ToString(), mod);
+                XMLgenerator.GenerateInfoXML(lblFolderBrowse.Content.ToString(), mod);
+                XMLgenerator.GenerateModuleConfigXML(lblFolderBrowse.Content.ToString(), mod);
             }
             
         }
