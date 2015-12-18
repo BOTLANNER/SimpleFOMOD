@@ -21,19 +21,22 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Reflection;
 using System.Threading;
 using SimpleFOMOD.Class_Files;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace SimpleFOMOD
 {
     public partial class ModuleConfigWindow
     {
         public static Mod mod;
+        public ObservableCollection<Group> groups = new ObservableCollection<Group>();
+        public static ObservableCollection<Module> modules = new ObservableCollection<Module>();
+        public static ObservableCollection<mFile> mfiles = new ObservableCollection<mFile>();
+
 
         public ModuleConfigWindow()
         {
             InitializeComponent();
-
-            lstGroup.ItemsSource = mod.Groups;
-            lstGroup.DataContext = mod;
 
             // Set hidden controls opacity to 0.
             txtAddGroup.Opacity = 0;
@@ -50,6 +53,11 @@ namespace SimpleFOMOD
             lblFolderBrowse.Opacity = 0;
             txtDescription.Opacity = 0;
             btnCreate.Opacity = 0;
+
+            DataContext = this;
+            lstGroup.ItemsSource = groups;
+            
+                        
 
             // Shows the folder controls.
             DoFadeInAnimation(lblFolderBrowse);
@@ -78,6 +86,7 @@ namespace SimpleFOMOD
             //var dialog = (BaseMetroDialog)this.Resources["CustomDialogTest"];
 
             //this.ShowMetroDialogAsync(dialog);
+            
         }
 
         // Plays the show animation for the given controls.
@@ -105,6 +114,7 @@ namespace SimpleFOMOD
                 {
                     e.Handled = true;
                     mod.Groups.Add(new Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne"));
+                    groups.Add(new Group(mod.ModName, txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new List<Module>()));
                     lstGroup.SelectedItem = txtAddGroup.Text;
                     txtAddGroup.Clear();
 
@@ -213,7 +223,10 @@ namespace SimpleFOMOD
                 // Unhides the group controls.
                 if (txtAddGroup.Opacity == 0)
                 {
-                    DoFadeInAnimation(txtAddGroup, lstGroup, rboSelectAny, rboSelectOne);
+                    DoFadeInAnimation(txtAddGroup, 
+                        lstGroup, 
+                        rboSelectAny, 
+                        rboSelectOne);
                 }
             }
             catch (Exception) { }
