@@ -53,7 +53,21 @@
         <!-- Folder stuff -->
         <Label x:Name="lblFolderBrowse" Content="Click Here To Select A Folder..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="355" MouseUp="FolderBrowse_MouseUp"/>
         <!-- Group stuff -->
-        <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center"/>
+        <!--<ListView x:Name="dataTest" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center"
+                  ItemsSource="{Binding}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding GroupName}"></TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+        <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding GroupName}"></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <TextBox x:Name="txtAddGroup" HorizontalAlignment="Left" Height="23" Margin="10,44,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" KeyDown="txtAddGroup_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Group..."/>
         <RadioButton x:Name="rboSelectAny" Content="SelectAny" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" IsChecked="True" ToolTip="Allow user to select any modules in this  group." ToolTipService.InitialShowDelay="0"/>
         <RadioButton x:Name="rboSelectOne" Content="SelectOne" HorizontalAlignment="Left" Margin="91,277,0,0" VerticalAlignment="Top" ToolTip="Allow user to select only one module from this group." ToolTipService.InitialShowDelay="0"/>
