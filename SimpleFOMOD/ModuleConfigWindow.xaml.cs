@@ -138,7 +138,59 @@ namespace SimpleFOMOD
         // Updates lstModules when the selected item changes.
         private void lstGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            lstModule.ItemsSource = mod.Groups[lstGroup.SelectedIndex].Modules;
+            if (lstGroup.SelectedIndex != -1)
+            {
+                lstModule.ItemsSource = mod.Groups[lstGroup.SelectedIndex].Modules;
+            }
+            else
+            {
+                lstModule.ItemsSource = null;
+            }
+
+            // Sets the correct checkbox for the current group.
+            if (mod.Groups[lstGroup.SelectedIndex].Type == "SelectAny")
+            {
+                if (lstGroup.SelectedIndex != -1)
+                {
+                    rboSelectAny.IsChecked = true;
+                }
+            }
+            else
+            {
+                if (lstGroup.SelectedIndex != -1)
+                {
+                    rboSelectOne.IsChecked = true;
+                }
+            }            
+        }
+
+        // Sets the group type based on the checkboxes being checked.
+        private void SelectAny_Checked(object sender, RoutedEventArgs e)
+        {
+            if(lstGroup.SelectedIndex != -1)
+            {
+                mod.Groups[lstGroup.SelectedIndex].Type = "SelectAny";
+            }  
+        }
+        private void SelectOne_Checked(object sender, RoutedEventArgs e)
+        {
+            if (lstGroup.SelectedIndex != -1)
+            {
+                mod.Groups[lstGroup.SelectedIndex].Type = "SelectExactlyOne";
+            }
+        }
+
+        // Removes the selected group when you press delete.
+        public void lstGroup_DeleteDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                if(lstGroup.SelectedIndex != -1)
+                {
+                    mod.Groups.RemoveAt(lstGroup.SelectedIndex);
+                    lstGroup.SelectedIndex = 0;
+                }
+            }
         }
 
         // Adds a module to the lstModule listbox.
@@ -146,11 +198,11 @@ namespace SimpleFOMOD
         {
             if (e.Key == Key.Enter)
             {
-                if (txtAddModule.Text != "")
+                if (txtAddModule.Text != "" && lstGroup.SelectedIndex != -1)
                 {
                     e.Handled = true;
                     mod.Groups[lstGroup.SelectedIndex].Modules.Add(new Mod.Group.Module(txtAddModule.Text));
-                    lstModule.SelectedItem = 0;
+                    lstModule.SelectedIndex = 0;
                     txtAddModule.Clear();
 
                     // Unhides file controls.
@@ -158,6 +210,18 @@ namespace SimpleFOMOD
                     {
                         DoFadeInAnimation(lstAllFiles, lstSelectedFiles, txtDestination, lblDestinationHelp, lblImageBrowse, btnCreate);
                     }
+                }
+            }
+        }
+
+        // Removes the selected group when you press delete.
+        public void lstModule_DeleteDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                if (lstModule.SelectedIndex != -1)
+                {
+                    mod.Groups[lstGroup.SelectedIndex].Modules.RemoveAt(lstModule.SelectedIndex);
                 }
             }
         }
