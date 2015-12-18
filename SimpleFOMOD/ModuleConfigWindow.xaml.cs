@@ -29,15 +29,15 @@ namespace SimpleFOMOD
     public partial class ModuleConfigWindow
     {
         public static Mod mod;
-        public ObservableCollection<Group> groups = new ObservableCollection<Group>();
-        public static ObservableCollection<Module> modules = new ObservableCollection<Module>();
-        public static ObservableCollection<mFile> mfiles = new ObservableCollection<mFile>();
+        // public ObservableCollection<Group> groups = new ObservableCollection<Group>();
+        // public static ObservableCollection<Module> modules = new ObservableCollection<Module>();
+        // public static ObservableCollection<mFile> mfiles = new ObservableCollection<mFile>();
 
 
         public ModuleConfigWindow()
         {
             InitializeComponent();
-
+            
             // Set hidden controls opacity to 0.
             txtAddGroup.Opacity = 0; txtAddGroup.Visibility = System.Windows.Visibility.Hidden;
             lstGroup.Opacity = 0; lstGroup.Visibility = System.Windows.Visibility.Hidden;
@@ -55,9 +55,8 @@ namespace SimpleFOMOD
             btnCreate.Opacity = 0; btnCreate.Visibility = System.Windows.Visibility.Hidden;
 
             DataContext = this;
-            lstGroup.ItemsSource = groups;
+            lstGroup.ItemsSource = mod.Groups;
             
-                        
 
             // Shows the folder controls.
             DoFadeInAnimation(lblFolderBrowse);
@@ -121,8 +120,8 @@ namespace SimpleFOMOD
                 if (txtAddGroup.Text != "")
                 {
                     e.Handled = true;
-                    mod.Groups.Add(new Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne"));
-                    groups.Add(new Group(mod.ModName, txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new List<Module>()));
+                    //mod.Groups.Add(new Mod.Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne"));
+                    mod.Groups.Add(new Mod.Group(mod.ModName, txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new ObservableCollection<Mod.Group.Module>()));
                     lstGroup.SelectedItem = txtAddGroup.Text;
                     txtAddGroup.Clear();
 

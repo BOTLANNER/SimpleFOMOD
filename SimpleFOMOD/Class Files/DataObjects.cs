@@ -16,11 +16,11 @@ namespace SimpleFOMOD
         public string Version { get; set; }
         public string URL { get; set; }
         public string Category { get; set; }
-        public List<Group> Groups { get; set; }
+        public ObservableCollection<Group> Groups { get; set; }
 
         public Mod() { }
 
-        public Mod(string modname, string author, string version, string url, string category, List<Group> groups)
+        public Mod(string modname, string author, string version, string url, string category, ObservableCollection<Group> groups)
         {
             ModName = modname;
             Author = author;
@@ -57,82 +57,87 @@ namespace SimpleFOMOD
             group.Modules.Add(module);
         }
         */
+        public class Group
+        {
+            public string ModName { get; set; }
+            public string GroupName { get; set; }
+            public string Type { get; set; }
+            public ObservableCollection<Module> Modules { get; set; }
+
+            public Group() { }
+
+            public Group(string modname, string groupname)
+            {
+                ModName = modname;
+                GroupName = groupname;
+            }
+
+            public Group(string modname, string groupname, string type)
+            {
+                ModName = modname;
+                Type = type;
+                GroupName = groupname;
+            }
+
+            public Group(string modname, string groupname, string type, ObservableCollection<Module> modules)
+            {
+                ModName = modname;
+                GroupName = groupname;
+                Type = type;
+                Modules = modules;
+            }
+
+            public class Module
+            {
+                public string GroupName { get; set; }
+                public string ModuleName { get; set; }
+                public ObservableCollection<mFile> Files { get; set; }
+                public string Description { get; set; }
+                public string LocalImagePath { get; set; }
+                public string RelativeImagePath { get; set; }
+
+                public Module() { }
+
+                public Module(string groupname, string modulename)
+                {
+                    GroupName = groupname;
+                    ModuleName = modulename;
+                }
+
+                public Module(string groupname, string modulename, ObservableCollection<mFile> files, string description, string imagePath)
+                {
+                    GroupName = groupname;
+                    ModuleName = modulename;
+                    Files = files;
+                    Description = description;
+                    LocalImagePath = imagePath;
+                    RelativeImagePath = @"fomod\images\" + Path.GetFileName(imagePath);
+                }
+
+                public class mFile
+                {
+                    public string ModuleName { get; set; }
+                    public string FileName { get; set; }
+                    public string Destination { get; set; }
+
+                    public mFile() { }
+
+                    public mFile(string modulename, string filename, string destination)
+                    {
+                        ModuleName = modulename;
+                        FileName = filename;
+                        Destination = destination;
+                    }
+                }
+            }
+        }
+
     }
 
-    public class Group
-    {
-        public string ModName { get; set; }
-        public string GroupName { get; set; }
-        public string Type { get; set; }
-        public List<Module> Modules { get; set; }
 
-        public Group() { }
+    
 
-        public Group(string modname, string groupname)
-        {
-            ModName = modname;
-            GroupName = groupname;
-        }
 
-        public Group(string modname, string groupname, string type)
-        {
-            ModName = modname;
-            Type = type;
-            GroupName = groupname;
-        }
-
-        public Group(string modname, string groupname, string type, List<Module> modules)
-        {
-            ModName = modname;
-            GroupName = groupname;
-            Type = type;
-            Modules = modules;
-        }
-    }
-
-    public class Module
-    {
-        public string GroupName { get; set; }
-        public string ModuleName { get; set; }
-        public List<mFile> Files { get; set; } 
-        public string Description { get; set; }
-        public string LocalImagePath { get; set; }
-        public string RelativeImagePath { get; set; }
-
-        public Module() { }
-
-        public Module(string groupname,  string modulename)
-        {
-            GroupName = groupname;
-            ModuleName = modulename;
-        }
-
-        public Module(string groupname, string modulename, List<mFile> files, string description, string imagePath)
-        {
-            GroupName = groupname;
-            ModuleName = modulename;
-            Files = files;
-            Description = description;
-            LocalImagePath = imagePath;
-            RelativeImagePath = @"fomod\images\" + Path.GetFileName(imagePath);
-        }
-    }
-
-    public class mFile
-    {
-        public string ModuleName { get; set; }
-        public string FileName { get; set; }
-        public string Destination { get; set; }
-
-        public mFile() { }
-
-        public mFile(string modulename, string filename, string destination)
-        {
-            ModuleName = modulename;
-            FileName = filename;
-            Destination = destination;
-        }
-    }
 
     //public class SubPropertyDescriptor : PropertyDescriptor
     //{
