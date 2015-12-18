@@ -103,7 +103,12 @@ namespace SimpleFOMOD
 
                     public mFile() { }
 
-                    public mFile(string modulename, string filename, string destination)
+                    public mFile(string filename)
+                    {
+                        FileName = filename;
+                    }
+
+                    public mFile(string filename, string destination)
                     {
                         FileName = filename;
                         Destination = destination;
