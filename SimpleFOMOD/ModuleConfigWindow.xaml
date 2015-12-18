@@ -84,14 +84,14 @@
         <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="93" Margin="10,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" Controls:TextBoxHelper.Watermark="Set Description For Selected Module..." KeyDown="txtDescription_KeyDown"/>
         <!-- File stuff -->
         <ListBox x:Name="lstAllFiles" HorizontalAlignment="Left" Height="349" Margin="431,44,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1" HorizontalContentAlignment="Center" MouseDoubleClick="lstAllFiles_DoubleClick" />
-        <ListBox x:Name="lstSelectedFiles" HorizontalAlignment="Left" Height="318" Margin="617,44,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1" HorizontalContentAlignment="Center" MouseDoubleClick="lstSelectedFiles_DoubleClick">
+        <ListBox x:Name="lstSelectedFiles" HorizontalAlignment="Left" Height="318" Margin="617,44,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1" HorizontalContentAlignment="Center" MouseDoubleClick="lstSelectedFiles_DoubleClick" SelectionChanged="lstSelectedFiles_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding FileName}"></TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBox x:Name="txtDestination" HorizontalAlignment="Left" Height="23" Margin="617,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Controls:TextBoxHelper.Watermark="[OPTIONAL] Destination..."/>
+        <TextBox x:Name="txtDestination" HorizontalAlignment="Left" Height="23" Margin="617,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Controls:TextBoxHelper.Watermark="[OPTIONAL] Destination..." KeyDown="txtDestination_KeyDown"/>
         <Label x:Name="lblDestinationHelp" Content="?" HorizontalAlignment="Left" Margin="775,367,0,0" VerticalAlignment="Top" Width="23" ToolTip="Specify a destination folder to install the selected file. - Eg. 'Texture' would install that file into 'Data/Texture'" ToolTipService.InitialShowDelay="0"/>
 
 

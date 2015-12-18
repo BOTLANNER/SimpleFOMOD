@@ -188,8 +188,14 @@ namespace SimpleFOMOD
             {
                 if(lstGroup.SelectedIndex != -1)
                 {
-                    mod.Groups.RemoveAt(lstGroup.SelectedIndex);
-                    lstGroup.SelectedIndex = 0;
+                    foreach (var modules in mod.Groups[lstGroup.SelectedIndex].Modules)
+                    {
+                        foreach (var files in modules.Files)
+                        {
+                            lstAllFiles.Items.Add(files.FileName);
+                        }
+                        mod.Groups.RemoveAt(lstGroup.SelectedIndex);
+                    }
                 }
             }
         }
@@ -202,7 +208,7 @@ namespace SimpleFOMOD
                 if (txtAddModule.Text != "" && lstGroup.SelectedIndex != -1)
                 {
                     e.Handled = true;
-                    mod.Groups[lstGroup.SelectedIndex].Modules.Add(new Mod.Group.Module(txtAddModule.Text));
+                    mod.Groups[lstGroup.SelectedIndex].Modules.Add(new Mod.Group.Module(txtAddModule.Text, new ObservableCollection<Mod.Group.Module.mFile>()));
                     lstModule.SelectedIndex = 0;
                     txtAddModule.Clear();
 
@@ -215,6 +221,7 @@ namespace SimpleFOMOD
             }
         }
 
+        // Adds the description to the selected module
         private void txtDescription_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -222,6 +229,20 @@ namespace SimpleFOMOD
                 if(txtDescription.Text != "" && lstModule.SelectedIndex != -1)
                 {
                     mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Description = txtDescription.Text;
+                    Keyboard.ClearFocus();
+                }
+            }
+        }
+
+        // Adds the destination to the selected file
+        private void txtDestination_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (txtDestination.Text != "" && lstSelectedFiles.SelectedIndex != -1)
+                {
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = txtDestination.Text;
+                    Keyboard.ClearFocus();
                 }
             }
         }
@@ -241,7 +262,23 @@ namespace SimpleFOMOD
                 {
                     txtDescription.Text = "";
                 }
-               
+            }
+        }
+
+        // Updates the relevant properties when you change the selected module.
+        private void lstSelectedFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Changes the "Description" property of the selected module if there is a module selected.
+            if (lstSelectedFiles.SelectedIndex != -1)
+            {
+                if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination != "")
+                {
+                    txtDestination.Text = mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination;
+                }
+                else
+                {
+                    txtDescription.Text = "";
+                }
             }
         }
 
@@ -252,6 +289,10 @@ namespace SimpleFOMOD
             {
                 if (lstModule.SelectedIndex != -1)
                 {
+                    foreach(var files in mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files)
+                    {
+                        lstAllFiles.Items.Add(files.FileName);
+                    }
                     mod.Groups[lstGroup.SelectedIndex].Modules.RemoveAt(lstModule.SelectedIndex);
                 }
             }
@@ -260,7 +301,7 @@ namespace SimpleFOMOD
         // Adds files to the Selected Files listbox and removes from all files.
         private void lstAllFiles_DoubleClick(object sender, RoutedEventArgs e)
         {
-            if (lstAllFiles.SelectedIndex != -1)
+            if (lstAllFiles.SelectedIndex != -1 && lstModule.SelectedIndex != -1 && lstGroup.SelectedIndex != -1)
             {
                 mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.Add(new Mod.Group.Module.mFile(lstAllFiles.SelectedItem.ToString()));
                 lstAllFiles.Items.Remove(lstAllFiles.SelectedItem);
@@ -272,8 +313,8 @@ namespace SimpleFOMOD
         {
             if (lstSelectedFiles.SelectedIndex != -1)
             {
-                lstAllFiles.Items.Add(lstSelectedFiles.SelectedItem);
-                mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.RemoveAt(lstAllFiles.SelectedIndex);
+                lstAllFiles.Items.Add(mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].FileName);
+                mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.RemoveAt(lstSelectedFiles.SelectedIndex);
             }
         }
 

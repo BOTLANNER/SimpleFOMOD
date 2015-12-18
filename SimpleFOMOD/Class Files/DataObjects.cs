@@ -82,9 +82,10 @@ namespace SimpleFOMOD
 
                 public Module() { }
 
-                public Module(string modulename)
+                public Module(string modulename, ObservableCollection<mFile> files)
                 {
                     ModuleName = modulename;
+                    Files = files;
                 }
 
                 public Module( string modulename, ObservableCollection<mFile> files, string description, string imagePath)
@@ -116,7 +117,6 @@ namespace SimpleFOMOD
                 }
             }
         }
-
     }
 
 
