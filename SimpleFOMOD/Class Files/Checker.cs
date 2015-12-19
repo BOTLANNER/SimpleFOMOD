@@ -62,7 +62,35 @@ namespace SimpleFOMOD.Class_Files
 
     public class ModuleConfigWindowChecker
     {
+        public static bool GroupCheck(string groupInput)
+        {
+            foreach(var group in ModuleConfigWindow.mod.Groups)
+            {
+                if(group.GroupName == groupInput)
+                {
+                    return false;
+                }
+                // return true;
+            }
+            return true;
+        }
 
+        public static bool ModuleCheck(string moduleInput)
+        {
+            foreach (var group in ModuleConfigWindow.mod.Groups)
+            {
+                foreach (var module in group.Modules)
+                {
+                    if (module.ModuleName == moduleInput)
+                    {
+                        return false;
+                    }
+                    // return true;
+                }
+                return true;
+            }
+            return false;
+        }
     }
 
 }

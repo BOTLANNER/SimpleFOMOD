@@ -52,10 +52,13 @@ namespace SimpleFOMOD
             btnCreate.Opacity = 0; btnCreate.Visibility = Visibility.Hidden;
             lblDestSaveConfirm.Opacity = 0; lblDestSaveConfirm.Visibility = Visibility.Hidden;
             lblDescSaveConfirm.Opacity = 0; lblDescSaveConfirm.Visibility = Visibility.Hidden;
+            lblGroupExists.Opacity = 0; lblGroupExists.Visibility = Visibility.Hidden;
+            lblModuleExists.Opacity = 0; lblModuleExists.Visibility = Visibility.Hidden;
             lblImageClear.Visibility = Visibility.Hidden;
+            
 
             this.DataContext = mod;
-            lstGroup.ItemsSource = mod.Groups;
+            
 
             // Shows the folder controls.
             DoFadeInAnimation(lblFolderBrowse);
@@ -84,21 +87,31 @@ namespace SimpleFOMOD
             {
                 if (txtAddGroup.Text != "")
                 {
-                    e.Handled = true;
-                    mod.Groups.Add(new Mod.Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new ObservableCollection<Mod.Group.Module>()));
-                    lstGroup.SelectedIndex = 0;
-                    if (mod.Groups[lstGroup.SelectedIndex].Modules == null)
+                    if(ModuleConfigWindowChecker.GroupCheck(txtAddGroup.Text))
                     {
-                        lstModule.ItemsSource = null;
-                        lstSelectedFiles.ItemsSource = null;
-                    }
-                    txtAddGroup.Clear();
+                        e.Handled = true;
+                        lstGroup.ItemsSource = mod.Groups;
+                        mod.Groups.Add(new Mod.Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new ObservableCollection<Mod.Group.Module>()));
+                        lstGroup.SelectedIndex = 0;
+                        if (mod.Groups[lstGroup.SelectedIndex].Modules == null)
+                        {
+                            lstModule.ItemsSource = null;
+                            lstSelectedFiles.ItemsSource = null;
+                        }
+                        txtAddGroup.Clear();
 
-                    // Unhides module controls.
-                    if (txtAddModule.Opacity == 0)
-                    {
-                        DoFadeInAnimation(txtAddModule, lstModule);
+                        // Unhides module controls.
+                        if (txtAddModule.Opacity == 0)
+                        {
+                            DoFadeInAnimation(txtAddModule, lstModule);
+                        }
                     }
+                    else
+                    {
+                        txtAddGroup.Clear();
+                        DoConfirmationAnimation(lblGroupExists);
+                    }
+
                 }
             }
         }
@@ -119,20 +132,23 @@ namespace SimpleFOMOD
             }
 
             // Sets the correct checkbox for the current group.
-            if (mod.Groups[lstGroup.SelectedIndex].Type == "SelectAny")
+            if (lstGroup.SelectedIndex != -1)
             {
-                if (lstGroup.SelectedIndex != -1)
+                if (mod.Groups[lstGroup.SelectedIndex].Type == "SelectAny")
                 {
-                    rboSelectAny.IsChecked = true;
+                    if (lstGroup.SelectedIndex != -1)
+                    {
+                        rboSelectAny.IsChecked = true;
+                    }
                 }
-            }
-            else
-            {
-                if (lstGroup.SelectedIndex != -1)
+                else
                 {
-                    rboSelectOne.IsChecked = true;
+                    if (lstGroup.SelectedIndex != -1)
+                    {
+                        rboSelectOne.IsChecked = true;
+                    }
                 }
-            }                      
+            }                 
         }
 
         // Sets the group type based on the checkboxes being checked.
@@ -180,20 +196,29 @@ namespace SimpleFOMOD
             {
                 if (txtAddModule.Text != "" && lstGroup.SelectedIndex != -1)
                 {
-                    e.Handled = true;
                     if (mod.Groups[lstGroup.SelectedIndex].Modules == null)
                     {
                         lstSelectedFiles.ItemsSource = null;
                     }
-                    mod.Groups[lstGroup.SelectedIndex].Modules.Add(new Mod.Group.Module(txtAddModule.Text, new ObservableCollection<Mod.Group.Module.mFile>()));
-                    lstModule.SelectedIndex = 0;
-                    txtAddModule.Clear();
-
-
-                    // Unhides file controls.
-                    if (lstAllFiles.Opacity == 0)
+                    if (ModuleConfigWindowChecker.ModuleCheck(txtAddModule.Text))
                     {
-                        DoFadeInAnimation(lstAllFiles, lstSelectedFiles, txtDestination, lblDestinationHelp, lblImageBrowse, btnCreate, txtDescription);
+                        e.Handled = true;
+
+                        mod.Groups[lstGroup.SelectedIndex].Modules.Add(new Mod.Group.Module(txtAddModule.Text, new ObservableCollection<Mod.Group.Module.mFile>()));
+                        lstModule.SelectedIndex = 0;
+                        txtAddModule.Clear();
+
+
+                        // Unhides file controls.
+                        if (lstAllFiles.Opacity == 0)
+                        {
+                            DoFadeInAnimation(lstAllFiles, lstSelectedFiles, txtDestination, lblDestinationHelp, lblImageBrowse, btnCreate, txtDescription);
+                        }
+                    }
+                    else
+                    {
+                        txtAddModule.Clear();
+                        DoConfirmationAnimation(lblModuleExists);
                     }
                 }
             }
@@ -297,6 +322,10 @@ namespace SimpleFOMOD
                 mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.Add(new Mod.Group.Module.mFile(lstAllFiles.SelectedItem.ToString()));
                 lstSelectedFiles.SelectedIndex = 0;
                 lstAllFiles.Items.Remove(lstAllFiles.SelectedItem);
+                if(btnCreate.Opacity == 0)
+                {
+                    DoFadeInAnimation(btnCreate);
+                }
             }
         }
 
@@ -392,6 +421,38 @@ namespace SimpleFOMOD
             newWin.Show();
         }
 
+        private async void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            MessageDialogResult result = await this.ShowMessageAsync("WARNING", "ARE YOU ABSOLUTELY SURE YOU WANT TO CLEAR THIS FORM?", MessageDialogStyle.AffirmativeAndNegative);
+
+            if (result == MessageDialogResult.Negative)
+            {
+                //don't do anything
+            }
+            else
+            {
+                mod.Groups = null;
+                mod.Groups = new ObservableCollection<Mod.Group>();
+                lstSelectedFiles.ItemsSource = null;
+                lstModule.ItemsSource = null;
+                lstGroup.ItemsSource = null;
+                txtDescription.Clear();
+                txtAddGroup.Clear();
+                txtAddModule.Clear();
+                txtDestination.Clear();
+                lstAllFiles.Items.Clear();
+                btnCreate.Opacity = 0; btnCreate.Visibility = Visibility.Hidden;
+
+                // Re-Adds the files in the selected folder back to the "all files" listbox.
+                string file;
+                foreach (var element in Directory.GetFiles(lblFolderBrowse.Content.ToString()))
+                {
+                    file = System.IO.Path.GetFileName(element);
+                    lstAllFiles.Items.Add(file);
+                }
+            }
+
+        }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {

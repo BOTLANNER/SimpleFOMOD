@@ -52,9 +52,19 @@ namespace SimpleFOMOD
                     }
 
                     // Copies the selected image to the "fomod\images" folder.
-                    if (module.LocalImagePath != "")
+                    if (module.LocalImagePath != null)
                     {
-                        File.Copy(module.LocalImagePath, imageFolder + Path.GetFileName(module.LocalImagePath));
+                        string currentImagePath = imageFolder + Path.GetFileName(module.LocalImagePath);
+                        // string duplicateImagePath = imageFolder + Path.GetFileNameWithoutExtension(module.LocalImagePath) + "_" + module.ModuleName + Path.GetExtension(module.LocalImagePath);
+                        if(File.Exists(currentImagePath))
+                        {
+                          //  File.Copy(module.LocalImagePath, duplicateImagePath);
+                        }
+                        else
+                        {
+                            File.Copy(module.LocalImagePath, currentImagePath);
+                        }
+                        
                     }
 
                     // Moves all associated files into module folders.

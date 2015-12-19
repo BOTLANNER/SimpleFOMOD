@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="SimpleFOMOD - Welcome" Height="353.704" Width="413.594"
         TitleCaps="False"
-        WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowStartupLocation="CenterScreen">
+        WindowTransitionsEnabled="False" Loaded="MetroWindow_Loaded" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowStartupLocation="CenterScreen" Icon="SimpleFOMOD.ico" ShowIconOnTitleBar="False">
 
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>

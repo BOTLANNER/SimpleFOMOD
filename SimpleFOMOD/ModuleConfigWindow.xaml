@@ -8,7 +8,7 @@
         xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="SimpleFOMOD - Mod Configuration" Height="436.192" Width="816.488"
-        TitleCaps="False" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowTransitionsEnabled="False" WindowStartupLocation="CenterOwner">
+        TitleCaps="False" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowTransitionsEnabled="False" WindowStartupLocation="CenterOwner" Icon="SimpleFOMOD.ico" ShowIconOnTitleBar="False">
 
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
@@ -31,6 +31,9 @@
             <Button x:Name="btnHelp"
                     Click="Help_Click"
                     Content="HELP"/>
+            <Button x:Name="btnClear"
+                    Click="Clear_Click"
+                    Content="CLEAR"/>
             <Button x:Name="btnCreate"
                     Click="Create_Click"
                     Content="CREATE"
@@ -88,7 +91,9 @@
         <Label x:Name="lblDestinationHelp" Content="?" HorizontalAlignment="Left" Margin="775,367,0,0" VerticalAlignment="Top" Width="23" ToolTip="Specify a destination folder to install the selected file. - Eg. 'Texture' would install that file into 'Data/Texture'" ToolTipService.InitialShowDelay="0"/>
         <!-- CONFIRMATION LABELS -->
         <Label x:Name="lblDescSaveConfirm" Content="Description Saved" HorizontalAlignment="Left" Margin="131,331,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
-        <Label x:Name="lblDestSaveConfirm" Content="Destination Saved" HorizontalAlignment="Left" Margin="617,366,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
+        <Label x:Name="lblDestSaveConfirm" Content="Destination Saved" HorizontalAlignment="Left" Margin="652,335,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
+        <Label x:Name="lblGroupExists" Content="Group Exists" HorizontalAlignment="Left" Margin="119,43,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FFA20303"/>
+        <Label x:Name="lblModuleExists" Content="Module Exists" HorizontalAlignment="Left" Margin="317,43,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FFA20303"/>
 
 
 

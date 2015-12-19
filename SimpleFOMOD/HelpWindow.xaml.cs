@@ -30,16 +30,14 @@ namespace SimpleFOMOD
             InitializeComponent();
 
             aboutControlList.Add(lblAuthors); aboutControlList.Add(lblVersion);
-
-            //helpControlList.Add();
-
+            helpControlList.Add(lblKeys);
         }
 
         private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(TabHelp != null && TabHelp.IsSelected)
             {
-                if (imgLogo.Opacity != 1)
+                if (lblFeedback.Opacity != 1)
                 {
                     // Variables
                     double AnimationLength = 0.5;
@@ -47,24 +45,25 @@ namespace SimpleFOMOD
                     int AnimationGap = 185;
 
                     // Fade in Animation.
-                    DoubleAnimation da = new DoubleAnimation();
-                    da.From = 0;
-                    da.To = 1;
-                    da.Duration = new Duration(TimeSpan.FromSeconds(AnimationLength));
-                    da.BeginTime = TimeSpan.FromMilliseconds(AnimationStart);
-                    imgLogo.BeginAnimation(OpacityProperty, da);
+                    DoubleAnimation db = new DoubleAnimation();
+                    db.From = 0;
+                    db.To = 1;
+                    db.Duration = new Duration(TimeSpan.FromSeconds(AnimationLength));
+                    db.BeginTime = TimeSpan.FromMilliseconds(AnimationStart);
+                    lblFeedback.BeginAnimation(OpacityProperty, db);
 
                     foreach (var control in helpControlList)
                     {
                         AnimationStart = AnimationStart + AnimationGap;
-                        da.BeginTime = TimeSpan.FromMilliseconds(AnimationStart);
-                        control.BeginAnimation(OpacityProperty, da);
+                        db.BeginTime = TimeSpan.FromMilliseconds(AnimationStart);
+                        control.BeginAnimation(OpacityProperty, db);
                     }
                 }
             }
 
             if(TabAbout != null && TabAbout.IsSelected)
             {
+
                 if (imgLogo.Opacity != 1)
                 {
                     // Variables
