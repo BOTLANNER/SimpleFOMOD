@@ -42,8 +42,6 @@ namespace SimpleFOMOD
             lstModule.Opacity = 0; lstModule.Visibility = Visibility.Hidden;
             lstAllFiles.Opacity = 0; lstAllFiles.Visibility = Visibility.Hidden;
             lstSelectedFiles.Opacity = 0; lstSelectedFiles.Visibility = Visibility.Hidden;
-            rboSelectAny.Opacity = 0; rboSelectAny.Visibility = Visibility.Hidden;
-            rboSelectOne.Opacity = 0; rboSelectOne.Visibility = Visibility.Hidden;
             txtDestination.Opacity = 0; txtDestination.Visibility = Visibility.Hidden;
             lblImageBrowse.Opacity = 0; lblImageBrowse.Visibility = Visibility.Hidden;
             lblDestinationHelp.Opacity = 0; lblDestinationHelp.Visibility = Visibility.Hidden;
@@ -55,7 +53,13 @@ namespace SimpleFOMOD
             lblGroupExists.Opacity = 0; lblGroupExists.Visibility = Visibility.Hidden;
             lblModuleExists.Opacity = 0; lblModuleExists.Visibility = Visibility.Hidden;
             lblImageClear.Visibility = Visibility.Hidden;
-            
+            cboGroupType.Opacity = 0; cboGroupType.Visibility = Visibility.Hidden;
+
+            cboGroupType.Items.Add("SelectAny");
+            cboGroupType.Items.Add("SelectExactlyOne");
+            cboGroupType.Items.Add("SelectAtMostOne");
+            cboGroupType.Items.Add("SelectAtLeastOne");
+            cboGroupType.Items.Add("SelectAll");
 
             this.DataContext = mod;
             
@@ -91,7 +95,7 @@ namespace SimpleFOMOD
                     {
                         e.Handled = true;
                         lstGroup.ItemsSource = mod.Groups;
-                        mod.Groups.Add(new Mod.Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new ObservableCollection<Mod.Group.Module>()));
+                        mod.Groups.Add(new Mod.Group(txtAddGroup.Text, cboGroupType.SelectedItem.ToString(), new ObservableCollection<Mod.Group.Module>()));
                         lstGroup.SelectedIndex = 0;
                         if (mod.Groups[lstGroup.SelectedIndex].Modules == null)
                         {
@@ -134,19 +138,25 @@ namespace SimpleFOMOD
             // Sets the correct checkbox for the current group.
             if (lstGroup.SelectedIndex != -1)
             {
-                if (mod.Groups[lstGroup.SelectedIndex].Type == "SelectAny")
+                if (mod.Groups[lstGroup.SelectedIndex].Type == "SelectAll")
                 {
-                    if (lstGroup.SelectedIndex != -1)
-                    {
-                        rboSelectAny.IsChecked = true;
-                    }
+                    cboGroupType.SelectedItem = "SelectAll";
+                }
+                else if (mod.Groups[lstGroup.SelectedIndex].Type == "SelectExactlyOne")
+                {
+                    cboGroupType.SelectedItem = "SelectExactlyOne";
+                }
+                else if (mod.Groups[lstGroup.SelectedIndex].Type == "SelectAtMostOne")
+                {
+                    cboGroupType.SelectedItem = "SelectAtMostOne";
+                }
+                else if (mod.Groups[lstGroup.SelectedIndex].Type == "SelectAtLeastOne")
+                {
+                    cboGroupType.SelectedItem = "SelectAtLeastOne";
                 }
                 else
                 {
-                    if (lstGroup.SelectedIndex != -1)
-                    {
-                        rboSelectOne.IsChecked = true;
-                    }
+                    cboGroupType.SelectedItem = "SelectAny";
                 }
             }                 
         }
@@ -164,6 +174,14 @@ namespace SimpleFOMOD
             if (lstGroup.SelectedIndex != -1)
             {
                 mod.Groups[lstGroup.SelectedIndex].Type = "SelectExactlyOne";
+            }
+        }
+
+        private void cboGroupType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(lstGroup.SelectedIndex != -1)
+            {
+                mod.Groups[lstGroup.SelectedIndex].Type = cboGroupType.SelectedItem.ToString();
             }
         }
 
@@ -269,6 +287,7 @@ namespace SimpleFOMOD
                     lblImageBrowse.Content = "[OPTIONAL] Click Here To Select An Image For This Module...";
                     lblImageClear.Visibility = Visibility.Hidden;
                 }
+
             }
             // Sets the selectedfile index to 1 if it has any entries
             if (lstSelectedFiles.SelectedIndex != -1)
@@ -301,15 +320,15 @@ namespace SimpleFOMOD
         private void lstSelectedFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Changes the "Destination" property of the file list.
-            if (lstSelectedFiles.SelectedIndex != -1 && lstModule.SelectedIndex != -1 && lstGroup.SelectedIndex != -1)
+            if (lstSelectedFiles.SelectedIndex != -1)
             {
-                if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination != "")
+                if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination != null)
                 {
                     txtDestination.Text = mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination;
                 }
                 else
                 {
-                    txtDestination.Text = null;
+                    txtDestination.Text = "";
                 }
             }
         }
@@ -525,7 +544,7 @@ namespace SimpleFOMOD
         {
             // Sets the folderbrowse textbox to the path.
             lblFolderBrowse.Content = ((TreeViewItem)e.NewValue).Tag.ToString();
-
+            FolderBrowserFlyout.IsOpen = false;
             lstAllFiles.Items.Clear();
             // Runs a loop for each file in the selected directory, adding it to the AllFiles listbox.
             string file;
@@ -541,9 +560,8 @@ namespace SimpleFOMOD
                 if (txtAddGroup.Opacity == 0)
                 {
                     DoFadeInAnimation(txtAddGroup, 
-                        lstGroup, 
-                        rboSelectAny, 
-                        rboSelectOne);
+                        lstGroup,
+                        cboGroupType);
                 }
             }
             catch (Exception) { }
@@ -574,7 +592,5 @@ namespace SimpleFOMOD
         }
 
         private object dummyNode = null;
-
-
     }
 }

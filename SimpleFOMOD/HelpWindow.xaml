@@ -23,7 +23,7 @@
                 <Grid>
                     <Image x:Name="imgLogo" HorizontalAlignment="Center" Height="73" Margin="62,10,103,0" VerticalAlignment="Top" Width="225" Source="Resources/SimpleFOMOD_Logo.png" Opacity="0"/>
                     <Label x:Name="lblAuthors" Content="Created by: SirDoombox // Kwazzi" HorizontalAlignment="Center" Margin="10,88,10,111" Width="370" Foreground="#FF636363" HorizontalContentAlignment="Center" FontSize="13.333" Opacity="0"/>
-                    <Label x:Name="lblVersion" Content="Version: v1.0a" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="370" Foreground="#FF636363" HorizontalContentAlignment="Center" FontSize="13.333" Opacity="0"/>
+                    <Label x:Name="lblVersion" Content="Version: v1.1a" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="370" Foreground="#FF636363" HorizontalContentAlignment="Center" FontSize="13.333" Opacity="0"/>
 
                 </Grid>
             </TabItem>
