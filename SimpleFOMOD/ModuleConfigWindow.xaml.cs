@@ -423,12 +423,12 @@ namespace SimpleFOMOD
             control.Visibility = Visibility.Visible;
             DoubleAnimation da = new DoubleAnimation();
             da.From = 0;
-            da.To = 0.25;
+            da.To = 0.9;
             da.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             da.Completed += (s, e) =>
             {
                 DoubleAnimation db = new DoubleAnimation();
-                db.From = 0.25;
+                db.From = 0.9;
                 db.To = 0;
                 db.Duration = new Duration(TimeSpan.FromSeconds(0.5));
                 db.BeginTime = TimeSpan.FromSeconds(0.2);

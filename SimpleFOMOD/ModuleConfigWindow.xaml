@@ -53,14 +53,6 @@
         <!-- Folder stuff -->
         <Label x:Name="lblFolderBrowse" Content="Click Here To Select A Folder..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="355" MouseUp="FolderBrowse_MouseUp"/>
         <!-- Group stuff -->
-        <!--<ListView x:Name="dataTest" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center"
-                  ItemsSource="{Binding}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding GroupName}"></TextBlock>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
         <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" SelectionChanged="lstGroup_SelectionChanged" KeyDown="lstGroup_DeleteDown">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -96,7 +88,7 @@
         <Label x:Name="lblDestinationHelp" Content="?" HorizontalAlignment="Left" Margin="775,367,0,0" VerticalAlignment="Top" Width="23" ToolTip="Specify a destination folder to install the selected file. - Eg. 'Texture' would install that file into 'Data/Texture'" ToolTipService.InitialShowDelay="0"/>
         <!-- CONFIRMATION LABELS -->
         <Label x:Name="lblDescSaveConfirm" Content="Description Saved" HorizontalAlignment="Left" Margin="131,331,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
-        <Label x:Name="lblDestSaveConfirm" Content="Destination Saved" HorizontalAlignment="Left" Margin="658,367,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
+        <Label x:Name="lblDestSaveConfirm" Content="Destination Saved" HorizontalAlignment="Left" Margin="617,366,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
 
 
 
