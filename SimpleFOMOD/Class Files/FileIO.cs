@@ -28,7 +28,7 @@ namespace SimpleFOMOD
                 Directory.CreateDirectory(imageFolder);
             }
 
-            // ---- Tentative rewrite of the file IO method, hopefully this should work because it's more or less the exact same setup as XMLGenerator ---- //
+            // ---- Glorious working FileIO Method. Sets up the directory structure and copies files into the right place ---- //
 
             // Creates directory structures and moves files into respective folders.
             foreach (var group in mod.Groups)
@@ -51,17 +51,17 @@ namespace SimpleFOMOD
                         Directory.CreateDirectory(tempModuleFolder);
                     }
 
-                    //// Copies the selected image to the "fomod\images" folder.
-                    //if (module.LocalImagePath != "")
-                    //{
-                    //    File.Copy(module.LocalImagePath, imageFolder + Path.GetFileName(module.LocalImagePath));
-                    //}
+                    // Copies the selected image to the "fomod\images" folder.
+                    if (module.LocalImagePath != "")
+                    {
+                        File.Copy(module.LocalImagePath, imageFolder + Path.GetFileName(module.LocalImagePath));
+                    }
 
                     // Moves all associated files into module folders.
                     foreach (var file in module.Files)
                     {
                         string tempFileName = file.FileName;
-                        File.Move(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempFileName);
+                        File.Copy(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempFileName);
                     }
                 }
             }

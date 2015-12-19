@@ -25,7 +25,7 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.LeftWindowCommands>
-    
+
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button x:Name="btnHelp"
@@ -81,6 +81,7 @@
         </ListBox>
         <TextBox x:Name="txtAddModule" HorizontalAlignment="Left" Height="23" Margin="215,44,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" KeyDown="txtAddModule_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Module..."/>
         <Label x:Name="lblImageBrowse" Content="[OPTIONAL] Click Here To Select An Image For This Module..." HorizontalAlignment="Left" Margin="431,10,-38,0" VerticalAlignment="Top" Width="413" MouseUp="ImageBrowse_MouseUp"/>
+        <Label x:Name="lblImageClear" Content="Clear Image" HorizontalAlignment="Right" Margin="0,10,375,0" VerticalAlignment="Top" Width="78" MouseUp="ImageClear_MouseUp" FontStyle="Italic" />
         <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="93" Margin="10,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" Controls:TextBoxHelper.Watermark="Set Description For Selected Module..." KeyDown="txtDescription_KeyDown"/>
         <!-- File stuff -->
         <ListBox x:Name="lstAllFiles" HorizontalAlignment="Left" Height="349" Margin="431,44,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1" HorizontalContentAlignment="Center" MouseDoubleClick="lstAllFiles_DoubleClick" />

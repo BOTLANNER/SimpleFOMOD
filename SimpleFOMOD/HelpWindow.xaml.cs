@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using System.Windows.Media.Animation;
 
 namespace SimpleFOMOD
 {
@@ -20,10 +21,74 @@ namespace SimpleFOMOD
     /// </summary>
     public partial class HelpWindow
     {
+        // List of all controls on the page.
+        public List<Control> aboutControlList = new List<Control>();
+        public List<Control> helpControlList = new List<Control>();
+        
         public HelpWindow()
-        {
-            
+        {            
             InitializeComponent();
+
+            aboutControlList.Add(lblAuthors); aboutControlList.Add(lblVersion);
+
+            //helpControlList.Add();
+
+        }
+
+        private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(TabHelp != null && TabHelp.IsSelected)
+            {
+                if (imgLogo.Opacity != 1)
+                {
+                    // Variables
+                    double AnimationLength = 0.5;
+                    int AnimationStart = 100;
+                    int AnimationGap = 185;
+
+                    // Fade in Animation.
+                    DoubleAnimation da = new DoubleAnimation();
+                    da.From = 0;
+                    da.To = 1;
+                    da.Duration = new Duration(TimeSpan.FromSeconds(AnimationLength));
+                    da.BeginTime = TimeSpan.FromMilliseconds(AnimationStart);
+                    imgLogo.BeginAnimation(OpacityProperty, da);
+
+                    foreach (var control in helpControlList)
+                    {
+                        AnimationStart = AnimationStart + AnimationGap;
+                        da.BeginTime = TimeSpan.FromMilliseconds(AnimationStart);
+                        control.BeginAnimation(OpacityProperty, da);
+                    }
+                }
+            }
+
+            if(TabAbout != null && TabAbout.IsSelected)
+            {
+                if (imgLogo.Opacity != 1)
+                {
+                    // Variables
+                    double AnimationLength = 0.5;
+                    int AnimationStart = 100;
+                    int AnimationGap = 185;
+
+                    // Fade in Animation.
+                    DoubleAnimation da = new DoubleAnimation();
+                    da.From = 0;
+                    da.To = 1;
+                    da.Duration = new Duration(TimeSpan.FromSeconds(AnimationLength));
+                    da.BeginTime = TimeSpan.FromMilliseconds(AnimationStart);
+                    imgLogo.BeginAnimation(OpacityProperty, da);
+
+                    foreach (var control in aboutControlList)
+                    {
+                        AnimationStart = AnimationStart + AnimationGap;
+                        da.BeginTime = TimeSpan.FromMilliseconds(AnimationStart);
+                        control.BeginAnimation(OpacityProperty, da);
+                    }
+                }
+            }
+
         }
     }
 }

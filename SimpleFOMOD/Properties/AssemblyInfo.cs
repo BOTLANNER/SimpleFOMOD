@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SimpleFOMOD")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("FOMOD Installation setup made easy.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SimpleFOMOD")]

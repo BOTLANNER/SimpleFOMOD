@@ -109,6 +109,6 @@ namespace SimpleFOMOD
 
                 ModuleConfig.Save(xw);
             }     
-        }
+        }        
     }
 }

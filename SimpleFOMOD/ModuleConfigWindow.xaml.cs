@@ -29,11 +29,7 @@ namespace SimpleFOMOD
 {
     public partial class ModuleConfigWindow
     {
-        public static Mod mod;
-        // public ObservableCollection<Group> groups = new ObservableCollection<Group>();
-        // public static ObservableCollection<Module> modules = new ObservableCollection<Module>();
-        // public static ObservableCollection<mFile> mfiles = new ObservableCollection<mFile>();
-        
+        public static Mod mod;     
 
         public ModuleConfigWindow()
         {
@@ -56,6 +52,7 @@ namespace SimpleFOMOD
             btnCreate.Opacity = 0; btnCreate.Visibility = Visibility.Hidden;
             lblDestSaveConfirm.Opacity = 0; lblDestSaveConfirm.Visibility = Visibility.Hidden;
             lblDescSaveConfirm.Opacity = 0; lblDescSaveConfirm.Visibility = Visibility.Hidden;
+            lblImageClear.Visibility = Visibility.Hidden;
 
             this.DataContext = mod;
             lstGroup.ItemsSource = mod.Groups;
@@ -88,9 +85,13 @@ namespace SimpleFOMOD
                 if (txtAddGroup.Text != "")
                 {
                     e.Handled = true;
-                    //mod.Groups.Add(new Mod.Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne"));
                     mod.Groups.Add(new Mod.Group(txtAddGroup.Text, (rboSelectAny.IsChecked ?? false) ? "SelectAny" : "SelectExactlyOne", new ObservableCollection<Mod.Group.Module>()));
                     lstGroup.SelectedIndex = 0;
+                    if (mod.Groups[lstGroup.SelectedIndex].Modules == null)
+                    {
+                        lstModule.ItemsSource = null;
+                        lstSelectedFiles.ItemsSource = null;
+                    }
                     txtAddGroup.Clear();
 
                     // Unhides module controls.
@@ -114,6 +115,7 @@ namespace SimpleFOMOD
             else
             {
                 lstModule.ItemsSource = null;
+                lstSelectedFiles.ItemsSource = null;
             }
 
             // Sets the correct checkbox for the current group.
@@ -179,9 +181,14 @@ namespace SimpleFOMOD
                 if (txtAddModule.Text != "" && lstGroup.SelectedIndex != -1)
                 {
                     e.Handled = true;
+                    if (mod.Groups[lstGroup.SelectedIndex].Modules == null)
+                    {
+                        lstSelectedFiles.ItemsSource = null;
+                    }
                     mod.Groups[lstGroup.SelectedIndex].Modules.Add(new Mod.Group.Module(txtAddModule.Text, new ObservableCollection<Mod.Group.Module.mFile>()));
                     lstModule.SelectedIndex = 0;
                     txtAddModule.Clear();
+
 
                     // Unhides file controls.
                     if (lstAllFiles.Opacity == 0)
@@ -210,24 +217,6 @@ namespace SimpleFOMOD
             }
         }
 
-        // Adds the destination to the selected file
-        private void txtDestination_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (txtDestination.Text != "" && lstSelectedFiles.SelectedIndex != -1)
-                {
-                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = txtDestination.Text;
-                    DoConfirmationAnimation(lblDestSaveConfirm);
-                    Keyboard.ClearFocus();
-                }
-                if (lstSelectedFiles.SelectedIndex != -1)
-                {
-                    // mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = null;
-                }
-                else { }
-            }
-        }
 
         // Updates the relevant properties when you change the selected module.
         private void lstModule_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -243,6 +232,17 @@ namespace SimpleFOMOD
                 else
                 {
                     txtDescription.Text = "";
+                }
+
+                if(mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].LocalImagePath != null)
+                {
+                    lblImageBrowse.Content = mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].LocalImagePath;
+                    lblImageClear.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    lblImageBrowse.Content = "[OPTIONAL] Click Here To Select An Image For This Module...";
+                    lblImageClear.Visibility = Visibility.Hidden;
                 }
             }
             // Sets the selectedfile index to 1 if it has any entries
@@ -276,7 +276,7 @@ namespace SimpleFOMOD
         private void lstSelectedFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Changes the "Destination" property of the file list.
-            if (lstSelectedFiles.SelectedIndex != -1)
+            if (lstSelectedFiles.SelectedIndex != -1 && lstModule.SelectedIndex != -1 && lstGroup.SelectedIndex != -1)
             {
                 if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination != "")
                 {
@@ -284,7 +284,7 @@ namespace SimpleFOMOD
                 }
                 else
                 {
-                    txtDescription.Text = "";
+                    txtDestination.Text = null;
                 }
             }
         }
@@ -295,6 +295,7 @@ namespace SimpleFOMOD
             if (lstAllFiles.SelectedIndex != -1 && lstModule.SelectedIndex != -1 && lstGroup.SelectedIndex != -1)
             {
                 mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.Add(new Mod.Group.Module.mFile(lstAllFiles.SelectedItem.ToString()));
+                lstSelectedFiles.SelectedIndex = 0;
                 lstAllFiles.Items.Remove(lstAllFiles.SelectedItem);
             }
         }
@@ -306,6 +307,25 @@ namespace SimpleFOMOD
             {
                 lstAllFiles.Items.Add(mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].FileName);
                 mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.RemoveAt(lstSelectedFiles.SelectedIndex);
+            }
+        }
+
+        // Adds the destination to the selected file
+        private void txtDestination_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (txtDestination.Text != "" && lstSelectedFiles.SelectedIndex != -1)
+                {
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = txtDestination.Text;
+                    DoConfirmationAnimation(lblDestSaveConfirm);
+                    Keyboard.ClearFocus();
+                }
+                if (lstSelectedFiles.SelectedIndex != -1)
+                {
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = "";
+                }
+                else { }
             }
         }
 
@@ -325,8 +345,21 @@ namespace SimpleFOMOD
                 {
                     lblImageBrowse.Content = openImageDialog.FileName;
                     mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].LocalImagePath = openImageDialog.FileName;
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].RelativeImagePath = @"fomod\images\" + System.IO.Path.GetFileName(openImageDialog.FileName);
+                    lblImageClear.Visibility = Visibility.Visible;
                 }
             }
+        }
+
+        private void ImageClear_MouseUp(object sender, RoutedEventArgs e)
+        {
+            if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].LocalImagePath != "")
+            {
+                mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].LocalImagePath = "";
+                lblImageBrowse.Content = "[OPTIONAL] Click Here To Select An Image For This Module...";
+                lblImageClear.Visibility = Visibility.Hidden;
+            }
+            else { }
         }
 
         // Opens the folder Browser
@@ -344,15 +377,6 @@ namespace SimpleFOMOD
 
 
         // ---------------------------------- O T H E R         S T U F F ---------------------------------- //
-
-        // Attempting to write an update method to handle all the goings on
-        private void UpdateWindow(Control control)
-        {
-            if(control == lstGroup)
-            {
-                
-            }
-        }
 
         // Opens NexusMods page in browser.
         private void LaunchSimpleFOMODOnNexusMods(object sender, RoutedEventArgs e)
@@ -393,23 +417,28 @@ namespace SimpleFOMOD
             }
         }
 
+        // Plays a quick fadeIn/fadeOut for the given control.
         private void DoConfirmationAnimation(Control control)
         {
             control.Visibility = Visibility.Visible;
             DoubleAnimation da = new DoubleAnimation();
             da.From = 0;
             da.To = 0.25;
-            da.Duration = new Duration(TimeSpan.FromSeconds(0.6));
-            control.BeginAnimation(OpacityProperty, da);
-            DoubleAnimation db = new DoubleAnimation();
-            db.From = 0.25;
-            db.To = 0;
-            db.Duration = new Duration(TimeSpan.FromSeconds(0.6));
-            da.Completed += (sender, eargs) =>
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            da.Completed += (s, e) =>
             {
+                DoubleAnimation db = new DoubleAnimation();
+                db.From = 0.25;
+                db.To = 0;
+                db.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+                db.BeginTime = TimeSpan.FromSeconds(0.2);
+                db.Completed += (sender, eargs) =>
+                {
+                    control.Visibility = Visibility.Hidden;
+                };
                 control.BeginAnimation(OpacityProperty, db);
-                control.Visibility = Visibility.Hidden;
             };
+            control.BeginAnimation(OpacityProperty, da);
         }
 
         // This button creates the things.

@@ -8,7 +8,22 @@
         mc:Ignorable="d"
         Title="SimpleFOMOD - Help" Height="300" Width="300"
         TitleCaps="False" ResizeMode="NoResize" EnableDWMDropShadow="True" WindowTransitionsEnabled="False" WindowStartupLocation="CenterOwner">
+
     <Grid>
-        
+        <TabControl Grid.Row="1" x:Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged">
+            <TabItem x:Name="TabHelp" Header="Help">
+                <Grid>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="TabAbout" Header="About">
+                <Grid>
+                    <Image x:Name="imgLogo" HorizontalAlignment="Center" Height="73" Margin="0,10,0,0" VerticalAlignment="Top" Width="188" Source="Resources/SimpleFOMOD_Logo.png" Opacity="0"/>
+                    <Label x:Name="lblAuthors" Content="Created by: SirDoombox // Kwazzi" HorizontalAlignment="Center" Margin="10,88,10,111" Width="266" Foreground="#FF636363" HorizontalContentAlignment="Center" FontSize="13.333" Opacity="0"/>
+                    <Label x:Name="lblVersion" Content="Version: v1.0a" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="266" Foreground="#FF636363" HorizontalContentAlignment="Center" FontSize="13.333" Opacity="0"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Controls:MetroWindow>
