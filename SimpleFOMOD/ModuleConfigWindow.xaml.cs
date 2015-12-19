@@ -221,10 +221,11 @@ namespace SimpleFOMOD
                     DoConfirmationAnimation(lblDestSaveConfirm);
                     Keyboard.ClearFocus();
                 }
-                else
+                if (lstSelectedFiles.SelectedIndex != -1)
                 {
-                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = null;
+                    // mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = null;
                 }
+                else { }
             }
         }
 

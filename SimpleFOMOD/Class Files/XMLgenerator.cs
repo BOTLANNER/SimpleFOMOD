@@ -41,7 +41,7 @@ namespace SimpleFOMOD
             foreach (var group in mod.Groups)
             {
                 XElement tempGroup = new XElement("group", new XAttribute("name", group.GroupName), new XAttribute("type", group.Type));
-                tempGroup.Add(new XElement("plugins", new XAttribute("order", "explicit")));
+                XElement tempGroupContainer = new XElement("plugins", new XAttribute("order", "Explicit"));
                 
                 foreach (var module in group.Modules)
                 {
@@ -50,13 +50,17 @@ namespace SimpleFOMOD
                     {
                         tempModule.Add(new XElement("description", module.Description));
                     }
+                    else
+                    {
+                        tempModule.Add(new XElement("description", ""));
+                    }
                     if (module.RelativeImagePath != null)
                     {
                         tempModule.Add(new XElement("image", new XAttribute("path", module.RelativeImagePath)));
                     }
                     XElement tempModuleFiles = new XElement("files");
                     tempModule.Add(tempModuleFiles);
-                    tempModule.Add(new XElement("typeDescriptor", new XElement("type", new XAttribute("name", group.Type))));
+                    tempModule.Add(new XElement("typeDescriptor", new XElement("type", new XAttribute("name", "Optional"))));
 
                     foreach (var file in module.Files)
                     {
@@ -71,8 +75,9 @@ namespace SimpleFOMOD
                         }
                         tempModuleFiles.Add(tempFiles);
                     }
-                    tempGroup.Add(tempModule);
+                    tempGroupContainer.Add(tempModule);
                 }
+                tempGroup.Add(tempGroupContainer);
                 xmlChunk.Add(tempGroup);
             }
         
@@ -91,6 +96,7 @@ namespace SimpleFOMOD
                 XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
                 // Creates moduleConfig.xml and writes it to the existing fomodfolder.
                 XDocument ModuleConfig = new XDocument(
+                    new XComment("Created With SimpleFOMOD - [NexusMods URL]"),
                     new XElement("config", new XAttribute(XNamespace.Xmlns + "xsi", "http://www.w3.org/2001/XMLSchema-instance"), new XAttribute(xsi + "noNamespaceSchemaLocation", "http://qconsulting.ca/fo3/ModConfig5.0.xsd"),
                     new XElement("moduleName", mod.ModName),
                         new XElement("installSteps", new XAttribute("order", "Explicit"),
