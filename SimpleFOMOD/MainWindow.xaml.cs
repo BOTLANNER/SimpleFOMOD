@@ -57,7 +57,7 @@ namespace SimpleFOMOD
         {
             var http = new HttpClient();
             string tempLatestVersion = await http.GetStringAsync(new Uri("https://raw.githubusercontent.com/sirdoombox/SimpleFOMOD/master/latest.txt"));
-            string latestVersion = tempLatestVersion.Remove(tempLatestVersion.Length -1);
+            string latestVersion = tempLatestVersion;
             string msgTemplate = "({0}) An Update is available - Press OK to go to download page.";
             string msgData = latestVersion;
             string updateMessage = string.Format(msgTemplate, msgData);
