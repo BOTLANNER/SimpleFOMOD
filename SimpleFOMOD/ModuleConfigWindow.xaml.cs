@@ -135,6 +135,16 @@ namespace SimpleFOMOD
                 lstSelectedFiles.ItemsSource = null;
             }
 
+            // Sets the selectedfile index to 1 if it has any entries
+            if (lstSelectedFiles.Items.Count != 0)
+            {
+                lstSelectedFiles.SelectedIndex = 0;
+            }
+            else
+            {
+                lstSelectedFiles.SelectedIndex = -1;
+            }
+
             // Sets the correct checkbox for the current group.
             if (lstGroup.SelectedIndex != -1)
             {
@@ -288,11 +298,23 @@ namespace SimpleFOMOD
                     lblImageClear.Visibility = Visibility.Hidden;
                 }
 
+                if(mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files != null)
+                {
+                    lstSelectedFiles.SelectedIndex = 0;
+                }
+                else
+                {
+                    lstSelectedFiles.SelectedIndex = -1;
+                }
             }
             // Sets the selectedfile index to 1 if it has any entries
-            if (lstSelectedFiles.SelectedIndex != -1)
+            if (lstSelectedFiles.Items.Count != 0)
             {
                 lstSelectedFiles.SelectedIndex = 0;
+            }
+            else
+            {
+                lstSelectedFiles.SelectedIndex = -1;
             }
 
         }
@@ -320,17 +342,22 @@ namespace SimpleFOMOD
         private void lstSelectedFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Changes the "Destination" property of the file list.
-            if (lstSelectedFiles.SelectedIndex != -1)
+            if (lstSelectedFiles.SelectedIndex == -1)
             {
-                if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination == "")
-                {
-                    txtDestination.Text = "";
-                }
-                else
+                txtDestination.Text = null;
+            }
+            else
+            {
+                try
                 {
                     txtDestination.Text = mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination;
                 }
+                catch
+                {
+                    txtDestination.Text = null;
+                }
             }
+            
         }
 
         // Adds files to the Selected Files listbox and removes from all files.
