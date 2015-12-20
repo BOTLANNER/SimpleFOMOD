@@ -364,9 +364,14 @@ namespace SimpleFOMOD
         // Adds files to the Selected Files listbox and removes from all files.
         private void lstAllFiles_DoubleClick(object sender, RoutedEventArgs e)
         {
+            List<string> tempFileList = new List<string>();
+            foreach(var file in mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files)
+            {
+                tempFileList.Add(file.FileName);
+            }
             if (lstAllFiles.SelectedIndex != -1 && lstModule.SelectedIndex != -1 && lstGroup.SelectedIndex != -1)
             {
-                if(ModuleConfigWindowChecker.FileCheck(lstAllFiles.SelectedItem.ToString()))
+                if(ModuleConfigWindowChecker.FileCheck(lstAllFiles.SelectedItem.ToString(), tempFileList))
                 {
                     mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.Add(new Mod.Group.Module.mFile(lstAllFiles.SelectedItem.ToString()));
                     lstSelectedFiles.SelectedIndex = 0;

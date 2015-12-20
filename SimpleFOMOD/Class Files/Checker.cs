@@ -90,33 +90,21 @@ namespace SimpleFOMOD.Class_Files
             return false;
         }
 
-        public static bool FileCheck(string fileInput)
+        public static bool FileCheck(string fileInput, List<String> existingFiles)
         {
-            foreach (var group in ModuleConfigWindow.mod.Groups)
+            if (fileInput.Contains(@"\"))
             {
-                foreach (var module in group.Modules)
-                {
-                    foreach (var file in module.Files)
-                    {
-                        if (fileInput.Contains(@"\"))
-                        {
-                            string tempCleanFileName = fileInput.Remove(0, fileInput.IndexOf(@"\")+1);
-                            if(file.FileName.Contains(tempCleanFileName))
-                            {
-                                return false;
-                            }
-                        }
-                        if (file.FileName.Contains(fileInput))
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-                }
-                return false;
+                fileInput = fileInput.Remove(0, fileInput.IndexOf(@"\") + 1);
             }
-            return false;
+
+            foreach (var file in existingFiles)
+            {
+                if(fileInput == file)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
-
 }

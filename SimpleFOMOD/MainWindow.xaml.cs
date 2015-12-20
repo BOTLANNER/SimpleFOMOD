@@ -26,7 +26,7 @@ namespace SimpleFOMOD
     public partial class MainWindow : MetroWindow
     {
 
-        public static string currentVersion = "1.1a";
+        public static string currentVersion = "1.1b";
 
         public MainWindow()
         {
