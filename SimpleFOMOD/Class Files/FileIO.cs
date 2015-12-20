@@ -64,14 +64,21 @@ namespace SimpleFOMOD
                         {
                             File.Copy(module.LocalImagePath, currentImagePath);
                         }
-                        
                     }
 
                     // Moves all associated files into module folders.
                     foreach (var file in module.Files)
                     {
                         string tempFileName = file.FileName;
-                        File.Copy(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempFileName);
+                        if (tempFileName.Contains(@"\"))
+                        {
+                            string tempCleanFileName = tempFileName.Remove(0, tempFileName.IndexOf(@"\"));
+                            File.Copy(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempCleanFileName);
+                        }
+                        else
+                        {
+                            File.Copy(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempFileName);
+                        }
                     }
                 }
             }

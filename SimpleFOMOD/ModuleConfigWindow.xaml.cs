@@ -322,13 +322,13 @@ namespace SimpleFOMOD
             // Changes the "Destination" property of the file list.
             if (lstSelectedFiles.SelectedIndex != -1)
             {
-                if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination != null)
+                if (mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination == "")
                 {
-                    txtDestination.Text = mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination;
+                    txtDestination.Text = "";
                 }
                 else
                 {
-                    txtDestination.Text = "";
+                    txtDestination.Text = mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination;
                 }
             }
         }
@@ -369,9 +369,9 @@ namespace SimpleFOMOD
                     DoConfirmationAnimation(lblDestSaveConfirm);
                     Keyboard.ClearFocus();
                 }
-                if (lstSelectedFiles.SelectedIndex != -1)
+                if (lstSelectedFiles.SelectedIndex == -1)
                 {
-                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = "";
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files[lstSelectedFiles.SelectedIndex].Destination = null;
                 }
                 else { }
             }
@@ -554,6 +554,16 @@ namespace SimpleFOMOD
                 {
                     file = System.IO.Path.GetFileName(element);
                     lstAllFiles.Items.Add(file);
+                }
+
+                foreach (string subDirectory in Directory.GetDirectories(lblFolderBrowse.Content.ToString()))
+                {
+                    string tenpSubDirectory = subDirectory.Remove(0, lblFolderBrowse.Content.ToString().Length +1);
+                    foreach (var element in Directory.GetFiles(subDirectory.ToString()))
+                    {
+                        file = System.IO.Path.GetFileName(element);
+                        lstAllFiles.Items.Add(tenpSubDirectory + @"\" + file);
+                    }
                 }
 
                 // Unhides the group controls.

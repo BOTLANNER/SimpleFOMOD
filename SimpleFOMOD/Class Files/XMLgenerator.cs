@@ -64,14 +64,41 @@ namespace SimpleFOMOD
 
                     foreach (var file in module.Files)
                     {
-                        XElement tempFiles = new XElement("file", new XAttribute("source", group.GroupName + @"\" + module.ModuleName + @"\" + file.FileName));
-                        if(file.Destination != null)
+                        XElement tempFiles;
+                        
+                        if (file.FileName.Contains(@"\"))
                         {
-                            tempFiles.Add(new XAttribute("destination", file.Destination + @"\" + file.FileName));
+                            string cleanFileName = file.FileName.Remove(0, file.FileName.IndexOf(@"\")+1);
+                            tempFiles = new XElement("file", new XAttribute("source", group.GroupName + @"\" + module.ModuleName + @"\" + cleanFileName));
                         }
                         else
                         {
-                            tempFiles.Add(new XAttribute("destination", file.FileName));
+                            tempFiles = new XElement("file", new XAttribute("source", group.GroupName + @"\" + module.ModuleName + @"\" + file.FileName));
+                        }
+
+                        if(file.Destination != null)
+                        {
+                            if (file.FileName.Contains(@"\"))
+                            {
+                                string cleanFileName = file.FileName.Remove(0, file.FileName.IndexOf(@"\")+1);
+                                tempFiles.Add(new XAttribute("destination", file.Destination + @"\" + cleanFileName));
+                            }
+                            else
+                            {
+                                tempFiles.Add(new XAttribute("destination", file.Destination + @"\" + file.FileName));
+                            }                           
+                        }
+                        else
+                        {
+                            if (file.FileName.Contains(@"\"))
+                            {
+                                string cleanFileName = file.FileName.Remove(0, file.FileName.IndexOf(@"\")+1);
+                                tempFiles.Add(new XAttribute("destination", cleanFileName));
+                            }
+                            else
+                            {
+                                tempFiles.Add(new XAttribute("destination", file.FileName));
+                            }                            
                         }
                         tempModuleFiles.Add(tempFiles);
                     }

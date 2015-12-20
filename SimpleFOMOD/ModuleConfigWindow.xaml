@@ -56,7 +56,7 @@
         <!-- Folder stuff -->
         <Label x:Name="lblFolderBrowse" Content="Click Here To Select A Folder..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="355" MouseUp="FolderBrowse_MouseUp"/>
         <!-- Group stuff -->
-        <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="197" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" SelectionChanged="lstGroup_SelectionChanged" KeyDown="lstGroup_DeleteDown">
+        <ListBox x:Name="lstGroup" HorizontalAlignment="Left" Height="166" Margin="10,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" SelectionChanged="lstGroup_SelectionChanged" KeyDown="lstGroup_DeleteDown">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding GroupName}"></TextBlock>
@@ -64,7 +64,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <TextBox x:Name="txtAddGroup" HorizontalAlignment="Left" Height="23" Margin="10,44,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" KeyDown="txtAddGroup_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Group..."/>
-        <ComboBox x:Name="cboGroupType" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" SelectionChanged="cboGroupType_SelectionChanged" SelectedIndex="0"/>
+        <ComboBox x:Name="cboGroupType" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" SelectionChanged="cboGroupType_SelectionChanged" SelectedIndex="0"/>
         <!-- Module stuff -->
         <ListBox x:Name="lstModule" HorizontalAlignment="Left" Height="197" Margin="215,75,0,0" VerticalAlignment="Top" Width="200" BorderThickness="1" HorizontalContentAlignment="Center" ToolTip="Set the GroupType of the selected Group." ToolTipService.InitialShowDelay="0" KeyDown="lstModule_DeleteDown" SelectionChanged="lstModule_SelectionChanged">
             <ListBox.ItemTemplate>
@@ -76,7 +76,7 @@
         <TextBox x:Name="txtAddModule" HorizontalAlignment="Left" Height="23" Margin="215,44,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" FontFamily="Segoe UI" KeyDown="txtAddModule_KeyDown" TextAlignment="Left" Controls:TextBoxHelper.Watermark="Add Module..."/>
         <Label x:Name="lblImageBrowse" Content="[OPTIONAL] Click Here To Select An Image For This Module..." HorizontalAlignment="Left" Margin="431,10,-38,0" VerticalAlignment="Top" Width="413" MouseUp="ImageBrowse_MouseUp"/>
         <Label x:Name="lblImageClear" Content="Clear Image" HorizontalAlignment="Right" Margin="0,10,375,0" VerticalAlignment="Top" Width="78" MouseUp="ImageClear_MouseUp" FontStyle="Italic" />
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="93" Margin="10,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" Controls:TextBoxHelper.Watermark="Set Description For Selected Module..." KeyDown="txtDescription_KeyDown"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="116" Margin="10,277,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" Controls:TextBoxHelper.Watermark="Set Description For Selected Module..." KeyDown="txtDescription_KeyDown"/>
         <!-- File stuff -->
         <ListBox x:Name="lstAllFiles" HorizontalAlignment="Left" Height="349" Margin="431,44,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1" HorizontalContentAlignment="Center" MouseDoubleClick="lstAllFiles_DoubleClick" />
         <ListBox x:Name="lstSelectedFiles" HorizontalAlignment="Left" Height="318" Margin="617,44,0,0" VerticalAlignment="Top" Width="181" BorderThickness="1" HorizontalContentAlignment="Center" MouseDoubleClick="lstSelectedFiles_DoubleClick" SelectionChanged="lstSelectedFiles_SelectionChanged">
@@ -89,11 +89,11 @@
         <TextBox x:Name="txtDestination" HorizontalAlignment="Left" Height="23" Margin="617,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Controls:TextBoxHelper.Watermark="[OPTIONAL] Destination..." KeyDown="txtDestination_KeyDown"/>
         <Label x:Name="lblDestinationHelp" Content="?" HorizontalAlignment="Left" Margin="775,367,0,0" VerticalAlignment="Top" Width="23" ToolTip="Specify a destination folder to install the selected file. - Eg. 'Texture' would install that file into 'Data/Texture'" ToolTipService.InitialShowDelay="0"/>
         <!-- CONFIRMATION LABELS -->
-        <Label x:Name="lblDescSaveConfirm" Content="Description Saved" HorizontalAlignment="Left" Margin="131,331,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
-        <Label x:Name="lblDestSaveConfirm" Content="Destination Saved" HorizontalAlignment="Left" Margin="652,335,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
-        <Label x:Name="lblGroupExists" Content="Group Exists" HorizontalAlignment="Left" Margin="119,43,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FFA20303"/>
-        <Label x:Name="lblModuleExists" Content="Module Exists" HorizontalAlignment="Left" Margin="317,43,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FFA20303"/>
-        
+        <Label x:Name="lblDescSaveConfirm" Content="Description Saved" HorizontalAlignment="Left" Margin="260,362,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
+        <Label x:Name="lblDestSaveConfirm" Content="Destination Saved" HorizontalAlignment="Left" Margin="673,336,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FF03A61A"/>
+        <Label x:Name="lblGroupExists" Content="Group Exists" HorizontalAlignment="Left" Margin="119,43,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FFF30000"/>
+        <Label x:Name="lblModuleExists" Content="Module Exists" HorizontalAlignment="Left" Margin="317,43,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Foreground="#FFF30000"/>
+
 
 
 
@@ -110,7 +110,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="10,10,10,5">
-                        Note: Ensure your folder contains only the loose files you wish to contain in your mod, with no subdirectories
+                        Note: Ensure your folder is AT MOST one sub-directory deep.
                     </TextBlock>
                     <TreeView x:Name="foldersItem"
                               Width="Auto" 
