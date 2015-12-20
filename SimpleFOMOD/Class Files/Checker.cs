@@ -70,7 +70,6 @@ namespace SimpleFOMOD.Class_Files
                 {
                     return false;
                 }
-                // return true;
             }
             return true;
         }
@@ -85,9 +84,36 @@ namespace SimpleFOMOD.Class_Files
                     {
                         return false;
                     }
-                    // return true;
                 }
                 return true;
+            }
+            return false;
+        }
+
+        public static bool FileCheck(string fileInput)
+        {
+            foreach (var group in ModuleConfigWindow.mod.Groups)
+            {
+                foreach (var module in group.Modules)
+                {
+                    foreach (var file in module.Files)
+                    {
+                        if (fileInput.Contains(@"\"))
+                        {
+                            string tempCleanFileName = fileInput.Remove(0, fileInput.IndexOf(@"\")+1);
+                            if(file.FileName.Contains(tempCleanFileName))
+                            {
+                                return false;
+                            }
+                        }
+                        if (file.FileName.Contains(fileInput))
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                return false;
             }
             return false;
         }

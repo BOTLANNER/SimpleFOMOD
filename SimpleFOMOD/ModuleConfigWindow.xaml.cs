@@ -54,6 +54,7 @@ namespace SimpleFOMOD
             lblModuleExists.Opacity = 0; lblModuleExists.Visibility = Visibility.Hidden;
             lblImageClear.Visibility = Visibility.Hidden;
             cboGroupType.Opacity = 0; cboGroupType.Visibility = Visibility.Hidden;
+            lblFileExists.Opacity = 0; lblFileExists.Visibility = Visibility.Hidden;
 
             cboGroupType.Items.Add("SelectAny");
             cboGroupType.Items.Add("SelectExactlyOne");
@@ -365,13 +366,21 @@ namespace SimpleFOMOD
         {
             if (lstAllFiles.SelectedIndex != -1 && lstModule.SelectedIndex != -1 && lstGroup.SelectedIndex != -1)
             {
-                mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.Add(new Mod.Group.Module.mFile(lstAllFiles.SelectedItem.ToString()));
-                lstSelectedFiles.SelectedIndex = 0;
-                lstAllFiles.Items.Remove(lstAllFiles.SelectedItem);
-                if(btnCreate.Opacity == 0)
+                if(ModuleConfigWindowChecker.FileCheck(lstAllFiles.SelectedItem.ToString()))
                 {
-                    DoFadeInAnimation(btnCreate);
+                    mod.Groups[lstGroup.SelectedIndex].Modules[lstModule.SelectedIndex].Files.Add(new Mod.Group.Module.mFile(lstAllFiles.SelectedItem.ToString()));
+                    lstSelectedFiles.SelectedIndex = 0;
+                    lstAllFiles.Items.Remove(lstAllFiles.SelectedItem);
+                    if (btnCreate.Opacity == 0)
+                    {
+                        DoFadeInAnimation(btnCreate);
+                    }
                 }
+                else
+                {
+                    DoConfirmationAnimation(lblFileExists);
+                }
+
             }
         }
 
@@ -496,6 +505,15 @@ namespace SimpleFOMOD
                     file = System.IO.Path.GetFileName(element);
                     lstAllFiles.Items.Add(file);
                 }
+                foreach (string subDirectory in Directory.GetDirectories(lblFolderBrowse.Content.ToString()))
+                {
+                    string tenpSubDirectory = subDirectory.Remove(0, lblFolderBrowse.Content.ToString().Length + 1);
+                    foreach (var element in Directory.GetFiles(subDirectory.ToString()))
+                    {
+                        file = System.IO.Path.GetFileName(element);
+                        lstAllFiles.Items.Add(tenpSubDirectory + @"\" + file);
+                    }
+                }
             }
 
         }
@@ -530,15 +548,15 @@ namespace SimpleFOMOD
             control.Visibility = Visibility.Visible;
             DoubleAnimation da = new DoubleAnimation();
             da.From = 0;
-            da.To = 0.9;
-            da.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            da.To = 0.75;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.75));
             da.Completed += (s, e) =>
             {
                 DoubleAnimation db = new DoubleAnimation();
-                db.From = 0.9;
+                db.From = 0.75;
                 db.To = 0;
-                db.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-                db.BeginTime = TimeSpan.FromSeconds(0.2);
+                db.Duration = new Duration(TimeSpan.FromSeconds(0.75));
+                db.BeginTime = TimeSpan.FromSeconds(0.5);
                 db.Completed += (sender, eargs) =>
                 {
                     control.Visibility = Visibility.Hidden;
@@ -551,7 +569,7 @@ namespace SimpleFOMOD
         // This button creates the things.
         private async void Create_Click(object sender, RoutedEventArgs e)
         {
-            MessageDialogResult result = await this.ShowMessageAsync("WARNING", "ARE YOU ABSOLUTELY SURE? BE SURE, BECAUSE THIS MIGHT BREAK EVERYTHING.", MessageDialogStyle.AffirmativeAndNegative);
+            MessageDialogResult result = await this.ShowMessageAsync("WARNING", "THIS PROCCESS IS FINAL AND UNREVERSABLE - ARE YOU SURE?", MessageDialogStyle.AffirmativeAndNegative);
 
             if (result == MessageDialogResult.Negative)
             {
