@@ -17,12 +17,16 @@ using MahApps.Metro.Controls;
 using System.Windows.Media.Animation;
 using SimpleFOMOD.Class_Files;
 using System.Collections.ObjectModel;
+using System.Net.Http;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace SimpleFOMOD
 {
 
     public partial class MainWindow : MetroWindow
     {
+
+        public static string currentVersion = "1.1a";
 
         public MainWindow()
         {
@@ -35,6 +39,9 @@ namespace SimpleFOMOD
             cboCategory.Opacity = 0.0;
             btnNext.Opacity = 0.0;
 
+            // Check for update
+            UpdateCheck();
+
             // TESTING VALUES //
             txtAuthor.Text = "TestAuthor";
             txtModName.Text = "Test Mod Name";
@@ -46,10 +53,34 @@ namespace SimpleFOMOD
 
         }
 
+        private async void UpdateCheck()
+        {
+            var http = new HttpClient();
+            string tempLatestVersion = await http.GetStringAsync(new Uri("https://raw.githubusercontent.com/sirdoombox/SimpleFOMOD/master/latest.txt"));
+            string latestVersion = tempLatestVersion.Remove(tempLatestVersion.Length -1);
+            string msgTemplate = "({0}) An Update is available - Press OK to go to download page.";
+            string msgData = latestVersion;
+            string updateMessage = string.Format(msgTemplate, msgData);
+            if (currentVersion != latestVersion)
+            {
+                MessageDialogResult result = await this.ShowMessageAsync("UPDATE", updateMessage, MessageDialogStyle.AffirmativeAndNegative);
+
+                if (result == MessageDialogResult.Negative)
+                {
+                    //don't do anything
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start("http://www.nexusmods.com/fallout4/mods/6441/");
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
         // Opens NexusMods page in browser.
         private void LaunchSimpleFOMODOnNexusMods(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/sirdoombox/SimpleFOMOD");
+            System.Diagnostics.Process.Start("http://www.nexusmods.com/fallout4/mods/6441/");
         }
 
         // Plays the show animation for the given controls.

@@ -31,6 +31,8 @@ namespace SimpleFOMOD
 
             aboutControlList.Add(lblAuthors); aboutControlList.Add(lblVersion);
             helpControlList.Add(lblKeys);
+
+            lblVersion.Content = "Version: " + MainWindow.currentVersion;
         }
 
         private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
