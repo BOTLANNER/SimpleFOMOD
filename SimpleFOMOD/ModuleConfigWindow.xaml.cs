@@ -651,6 +651,49 @@ namespace SimpleFOMOD
             }
         }
 
+        //TESTING LOADING BUTTON
+        public async void btnLoadTest_Click(object sender, RoutedEventArgs e)
+        {
+            // ***************
+            // First example is a box that shows actual progress. Can be modified to check certain things
+            var controller = await this.ShowProgressAsync("Please wait", "\nMod XML created!\n\nLoading folder structure...");
+            controller.SetCancelable(false);
+
+            double i = 0;
+            while (i < 26.0)
+            {
+                double val = (i / 100.0) * 4.0;
+                controller.SetProgress(val);
+                controller.SetMessage("\nMod XML created!\n\nLoading folder structure...");
+
+                if (controller.IsCanceled)  //this won't be possible due to the box being not cancelable
+                {
+                    await this.ShowMessageAsync("Cancelled!", "Mod creation was cancelled!");
+                    break;
+                }
+
+                i += 1.0;
+                await Task.Delay(150);
+            }
+            await controller.CloseAsync();
+            //
+            // ***************
+
+            // ***************
+            //This example shows a general loading swooshy bar. Probably better for what we're doing. And easier to use.
+            var controller2 = await this.ShowProgressAsync("Please wait", "\nMod XML created!\n\nLoading folder structure...");
+            controller.SetCancelable(true);
+
+            await Task.Delay(4000);
+
+            await controller2.CloseAsync();
+
+
+
+            // ***************
+
+        }
+
         private object dummyNode = null;
     }
 }
