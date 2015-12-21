@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO.Compression;
 
 namespace SimpleFOMOD
 {
@@ -56,9 +57,9 @@ namespace SimpleFOMOD
                     {
                         string currentImagePath = imageFolder + Path.GetFileName(module.LocalImagePath);
                         // string duplicateImagePath = imageFolder + Path.GetFileNameWithoutExtension(module.LocalImagePath) + "_" + module.ModuleName + Path.GetExtension(module.LocalImagePath);
-                        if(File.Exists(currentImagePath))
+                        if (File.Exists(currentImagePath))
                         {
-                          //  File.Copy(module.LocalImagePath, duplicateImagePath);
+                            //  File.Copy(module.LocalImagePath, duplicateImagePath);
                         }
                         else
                         {
@@ -73,16 +74,15 @@ namespace SimpleFOMOD
                         if (tempFileName.Contains(@"\"))
                         {
                             string tempCleanFileName = tempFileName.Remove(0, tempFileName.IndexOf(@"\"));
-                            File.Copy(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempCleanFileName);
+                            File.Move(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempCleanFileName);
                         }
                         else
                         {
-                            File.Copy(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempFileName);
+                            File.Move(activeFolder + @"\" + tempFileName, tempModuleFolder + @"\" + tempFileName);
                         }
                     }
                 }
             }
-
         }
     }
 }

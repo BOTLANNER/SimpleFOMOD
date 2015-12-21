@@ -24,6 +24,7 @@ using SimpleFOMOD.Class_Files;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace SimpleFOMOD
 {
@@ -583,11 +584,45 @@ namespace SimpleFOMOD
             }
             else
             {
+                var controller = await this.ShowProgressAsync("Please wait", "\nCreating FOMOD Installation...");
+                controller.SetCancelable(false);
+                
+
+                await Task.Delay(RandomDelay(1000, 2000));
+                controller.SetMessage("\n Creating File/Folder Structure...");
+                await Task.Delay(RandomDelay(2000, 5000));
                 FileIO.fileManipulation(lblFolderBrowse.Content.ToString(), mod);
+                controller.SetMessage("\n File/Folder Structure Created!");
+
+                await Task.Delay(RandomDelay(1000, 2000));
+                controller.SetMessage("\n Creating Info.XML...");
+                await Task.Delay(RandomDelay(2000, 5000));
                 XMLgenerator.GenerateInfoXML(lblFolderBrowse.Content.ToString(), mod);
+                controller.SetMessage("\n Info.XML Created!");
+
+                await Task.Delay(RandomDelay(1000, 2000));
+                controller.SetMessage("\n Creating ModuleConfig.XML...");
+                await Task.Delay(RandomDelay(2000, 5000));
                 XMLgenerator.GenerateModuleConfigXML(lblFolderBrowse.Content.ToString(), mod);
+                controller.SetMessage("\n ModuleInfo.XML Created!");
+                await controller.CloseAsync();
+
+                MessageDialogResult completedResult = await this.ShowMessageAsync("Completed", "\nFOMOD Installation created.\nClick to close the application.", MessageDialogStyle.Affirmative);
+
+                if (completedResult == MessageDialogResult.Affirmative)
+                {
+                    Process.Start(lblFolderBrowse.Content.ToString());
+                    this.Close();
+                }
             }
 
+        }
+
+        private static int RandomDelay(int lower, int upper)
+        {
+            Random rnd = new Random();
+            int randomDelay = rnd.Next(lower, upper);
+            return randomDelay;
         }
 
         // Sets the active folder textbox to whatever you select in the flyout treeview.
@@ -684,6 +719,7 @@ namespace SimpleFOMOD
             //This example shows a general loading swooshy bar. Probably better for what we're doing. And easier to use.
             var controller2 = await this.ShowProgressAsync("Please wait", "\nMod XML created!\n\nLoading folder structure...");
             controller.SetCancelable(true);
+            
 
             await Task.Delay(4000);
 
