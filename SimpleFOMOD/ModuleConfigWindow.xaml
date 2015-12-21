@@ -28,9 +28,6 @@
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button x:Name="btnLoadTest"
-                    Click="btnLoadTest_Click"
-                    Content="LoadTest"/>
             <Button x:Name="btnHelp"
                     Click="Help_Click"
                     Content="HELP"/>
