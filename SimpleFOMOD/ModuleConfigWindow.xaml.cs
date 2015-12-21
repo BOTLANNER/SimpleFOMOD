@@ -501,6 +501,7 @@ namespace SimpleFOMOD
                 txtAddModule.Clear();
                 txtDestination.Clear();
                 lstAllFiles.Items.Clear();
+                cboGroupType.SelectedIndex = 0;
                 btnCreate.Opacity = 0; btnCreate.Visibility = Visibility.Hidden;
 
                 // Re-Adds the files in the selected folder back to the "all files" listbox.
